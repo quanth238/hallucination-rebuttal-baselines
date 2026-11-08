@@ -81,6 +81,8 @@ def render(snapshot):
             lines.append(f"| {NAMES[method]} | {values} |")
     else:
         lines += ['', 'Completed scores will be added as the sampled runs finish. [Run files](results/sampled/) · [Progress snapshot](tracking/snapshot.json).']
+    if (REPO / 'results/sampled/regular/reference_check.json').exists():
+        lines += ['', 'Regular T=1 differs from the recorded manuscript baseline; see the [reference comparison](results/sampled/regular/reference_check.json).']
     lines += ['', 'CHAIR and recall are percentages. Timing uses an RTX4090. Recorded preprocessing and timing scopes are described in the [evaluation notes](docs/EVALUATION.md).', '',
         '## Code', '',
         '| Method | Source | Upstream |',

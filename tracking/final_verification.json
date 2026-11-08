@@ -1,0 +1,227 @@
+{
+  "status": "all_8_runs_verified",
+  "captions": 4000,
+  "images_per_method_per_protocol": 500,
+  "created_at_utc": "2026-11-08T22:52:14.665603+00:00",
+  "results": [
+    {
+      "protocol": "greedy",
+      "method": "regular",
+      "metrics": {
+        "CHAIR_S": 33.6,
+        "CHAIR_I": 6.05763575769457,
+        "object_recall": 70.84398976982096,
+        "average_tokens": 282.856,
+        "cap_hits": 36,
+        "total_generation_seconds": 4445.845182381978,
+        "peak_vram_gb": 7.1055426597595215,
+        "observed_tokens_per_second": 31.811274166822482
+      },
+      "counts": {
+        "captions": 500,
+        "hallucinating_captions": 168,
+        "hallucinated_object_mentions": 309,
+        "generated_object_mentions": 5101,
+        "recalled_ground_truth_objects": 1108,
+        "ground_truth_objects": 1564
+      }
+    },
+    {
+      "protocol": "greedy",
+      "method": "flb",
+      "metrics": {
+        "CHAIR_S": 31.4,
+        "CHAIR_I": 5.691655921900902,
+        "object_recall": 67.77493606138107,
+        "average_tokens": 274.364,
+        "cap_hits": 20,
+        "total_generation_seconds": 4438.142386078136,
+        "peak_vram_gb": 7.1055426597595215,
+        "observed_tokens_per_second": 30.90977892694965
+      },
+      "counts": {
+        "captions": 500,
+        "hallucinating_captions": 157,
+        "hallucinated_object_mentions": 309,
+        "generated_object_mentions": 5429,
+        "recalled_ground_truth_objects": 1060,
+        "ground_truth_objects": 1564
+      }
+    },
+    {
+      "protocol": "greedy",
+      "method": "vista",
+      "metrics": {
+        "CHAIR_S": 31.0,
+        "CHAIR_I": 5.467511885895404,
+        "object_recall": 68.15856777493606,
+        "average_tokens": 316.788,
+        "cap_hits": 102,
+        "total_generation_seconds": 7848.532994740235,
+        "peak_vram_gb": 7.149168491363525,
+        "observed_tokens_per_second": 20.181351101683482
+      },
+      "counts": {
+        "captions": 500,
+        "hallucinating_captions": 155,
+        "hallucinated_object_mentions": 345,
+        "generated_object_mentions": 6310,
+        "recalled_ground_truth_objects": 1066,
+        "ground_truth_objects": 1564
+      }
+    },
+    {
+      "protocol": "greedy",
+      "method": "causallens",
+      "metrics": {
+        "CHAIR_S": 26.400000000000002,
+        "CHAIR_I": 5.042794355771455,
+        "object_recall": 68.35038363171356,
+        "average_tokens": 230.632,
+        "cap_hits": 29,
+        "total_generation_seconds": 4220.5400044916605,
+        "peak_vram_gb": 7.2639946937561035,
+        "observed_tokens_per_second": 27.322570068587503
+      },
+      "counts": {
+        "captions": 500,
+        "hallucinating_captions": 132,
+        "hallucinated_object_mentions": 218,
+        "generated_object_mentions": 4323,
+        "recalled_ground_truth_objects": 1069,
+        "ground_truth_objects": 1564
+      }
+    },
+    {
+      "protocol": "sampled",
+      "method": "regular",
+      "metrics": {
+        "CHAIR_S": 43.2,
+        "CHAIR_I": 8.089631598936574,
+        "object_recall": 67.07161125319693,
+        "average_tokens": 368.892,
+        "cap_hits": 114,
+        "total_generation_seconds": 5900.868871211947,
+        "peak_vram_gb": 7.105866432189941,
+        "observed_tokens_per_second": 31.25743073191146
+      },
+      "counts": {
+        "captions": 500,
+        "hallucinating_captions": 216,
+        "hallucinated_object_mentions": 426,
+        "generated_object_mentions": 5266,
+        "recalled_ground_truth_objects": 1049,
+        "ground_truth_objects": 1564
+      }
+    },
+    {
+      "protocol": "sampled",
+      "method": "flb",
+      "metrics": {
+        "CHAIR_S": 34.0,
+        "CHAIR_I": 5.8759913482335975,
+        "object_recall": 68.79795396419436,
+        "average_tokens": 306.522,
+        "cap_hits": 32,
+        "total_generation_seconds": 4965.296474705159,
+        "peak_vram_gb": 7.105903148651123,
+        "observed_tokens_per_second": 30.866434820309635
+      },
+      "counts": {
+        "captions": 500,
+        "hallucinating_captions": 170,
+        "hallucinated_object_mentions": 326,
+        "generated_object_mentions": 5548,
+        "recalled_ground_truth_objects": 1076,
+        "ground_truth_objects": 1564
+      }
+    },
+    {
+      "protocol": "sampled",
+      "method": "vista",
+      "metrics": {
+        "CHAIR_S": 41.8,
+        "CHAIR_I": 8.792309232926096,
+        "object_recall": 63.68286445012787,
+        "average_tokens": 349.406,
+        "cap_hits": 106,
+        "total_generation_seconds": 8626.122227616783,
+        "peak_vram_gb": 7.149753093719482,
+        "observed_tokens_per_second": 20.252785132198014
+      },
+      "counts": {
+        "captions": 500,
+        "hallucinating_captions": 209,
+        "hallucinated_object_mentions": 439,
+        "generated_object_mentions": 4993,
+        "recalled_ground_truth_objects": 996,
+        "ground_truth_objects": 1564
+      }
+    },
+    {
+      "protocol": "sampled",
+      "method": "causallens",
+      "metrics": {
+        "CHAIR_S": 37.2,
+        "CHAIR_I": 7.917705735660848,
+        "object_recall": 67.07161125319693,
+        "average_tokens": 326.128,
+        "cap_hits": 110,
+        "total_generation_seconds": 6136.438406781061,
+        "peak_vram_gb": 7.2639946937561035,
+        "observed_tokens_per_second": 26.573068804830896
+      },
+      "counts": {
+        "captions": 500,
+        "hallucinating_captions": 186,
+        "hallucinated_object_mentions": 381,
+        "generated_object_mentions": 4812,
+        "recalled_ground_truth_objects": 1049,
+        "ground_truth_objects": 1564
+      }
+    }
+  ],
+  "files": {
+    "greedy/regular": {
+      "captions_sha256": "d032fdf177e87feace8c5aa9baa88d77f8c8d9df258f00a98c14d23b7e10eccf",
+      "run_sha256": "c8760de41b379742b5bfd390296d6561a6f7ba6a39bf350f7882a0614b6c346d",
+      "scores_sha256": "70bf3ec000c4bc4224fb5d7d21a6b828a980bc15a2df75413e56f3096e22b0fe"
+    },
+    "greedy/flb": {
+      "captions_sha256": "76f2aef39c8bd031e215837389b692bf037a54c2c889e12a9741cb1fc3f4ec6d",
+      "run_sha256": "2ffa7cc27a7e01d1efe5d082796646ad0676c7e50d73126d23712e8c87a8f84a",
+      "scores_sha256": "7746a6e3584d4ce72293303d3ec6abd93796ad96ee76827d0a77bc5e8a4ebb25"
+    },
+    "greedy/vista": {
+      "captions_sha256": "bcbba0b33429ac05a7e224244f5e474fb608c72e14c1341d371021719a025ed4",
+      "run_sha256": "9cf82c444365e45828e4feb170fdc6be2eb5dc4fe8aba45e8c23b5cb9d85c185",
+      "scores_sha256": "7ea3e1e66b7319ed99feff118870211191517dd3ea86036ea14242c83fb060fc"
+    },
+    "greedy/causallens": {
+      "captions_sha256": "9f2bca0e4b21e6b21560e93452d0fca479982e4dd2727f450ddb968b95265346",
+      "run_sha256": "0ee865dd026d65ed940624a8654f8113d4e7946fb19b15c8df08efe24bdcfb29",
+      "scores_sha256": "80bb89227063f294d63d40c78ef2762d0cdb5b4958b03fb53afa1de80f886b20"
+    },
+    "sampled/regular": {
+      "captions_sha256": "64f0bde2cf62856c91ecb4a012b4368b0ac1511dabc40ada37ef8244131240a3",
+      "run_sha256": "4e18f74c164fd417b28b232765d23c58e19a3b237c617bd4cd752edf2b244c14",
+      "scores_sha256": "b381b0686bf57b9b08d0c3cf147c74d30f1e5705f73413c976d8579f1c5a5150"
+    },
+    "sampled/flb": {
+      "captions_sha256": "e1c9afaeba30ac01cf00a59591e845f5626fd0dc8e647eeb4651d909b545ce05",
+      "run_sha256": "cbc7d4b558458194ef3e35e406d33973572fcbc37fe3ee1f737e4de975b13cd5",
+      "scores_sha256": "0e6483487202df1f9a5fcb561fe8a4f4fd599ffcf12798eadc85f8112da845b0"
+    },
+    "sampled/vista": {
+      "captions_sha256": "246f7e729eb4f82f0881d393da86da33d3164f05eb78bd164efde5e092874581",
+      "run_sha256": "039a1893549aeeeeeac7732e345c730927b889e1c4fc458d58388f98fa7e54b8",
+      "scores_sha256": "d551dd1450d3982cc953964784fe6635f0bba154340d715ab9bfca1878ac5545"
+    },
+    "sampled/causallens": {
+      "captions_sha256": "3233e35f6b8270a8ca05902e9aef2774e3878838f366e5a23fa92ce2af40f3f7",
+      "run_sha256": "365017e560d2f35a1fba60aa3377a599dddc9ef0d7b18153209ea69e42b05d97",
+      "scores_sha256": "fbc99187312f0c04d97b43218412c1881ea374e171ac989dc3c77c81ca15dafc"
+    }
+  },
+  "limitations": "Recorded processor and timing scopes differ between greedy and sampling; the Regular T1 result does not reproduce historic paper rows."
+}

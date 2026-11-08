@@ -28,6 +28,8 @@ Both protocols use a 512-token cap and NLTK 3.10.3 scoring.
 | VISTA | 41.80 | 8.79 | 63.68 | 349.41 | 20.25 |
 | CausalLens | 37.20 | 7.92 | 67.07 | 326.13 | 26.57 |
 
+Regular T=1 differs from the recorded manuscript baseline; see the [reference comparison](results/sampled/regular/reference_check.json).
+
 CHAIR and recall are percentages. Timing uses an RTX4090. Recorded preprocessing and timing scopes are described in the [evaluation notes](docs/EVALUATION.md).
 
 ## Code
