@@ -1,0 +1,52 @@
+{
+  "count": 500,
+  "metrics": {
+    "CHAIR_S": 26.400000000000002,
+    "CHAIR_I": 5.042794355771455,
+    "object_recall": 68.35038363171356,
+    "average_tokens": 230.632,
+    "cap_hits": 29,
+    "total_generation_seconds": 4220.5400044916605,
+    "peak_vram_gb": 7.2639946937561035,
+    "observed_tokens_per_second": 27.322570068587503
+  },
+  "signature": {
+    "manifest_sha256": "d37ef568119e02f9afdd83db56fcfdf8caca386c93234f0d039b072afde8c83f",
+    "source_sha256": {
+      "chair.py": "b05f701ce6ec0125dd700ffb80ed58bfcf2686df8c9bd62f70169cb928de4627",
+      "synonyms.txt": "b685537b36fe21b791c87151b96a991ceb582edff19f3da204dcc7a7905502f2"
+    },
+    "annotation_sha256": {
+      "instances_train2014.json": "777ef504abfeba349930485bb32ecd5b6529129a3e010f7852e1437cb049b732",
+      "instances_val2014.json": "e1b4d1bc54906827b1a029981b1c77f2088bd4462569b7615db7929070c3ab47",
+      "captions_train2014.json": "dd8c9636dc11740f956e36728866ea0c4ebe4988dcbdc5e712b7c2267f152d12",
+      "captions_val2014.json": "7da4cc45cb76ee1642d163e846e1e0a33feffac2e841c9c426d585ea499165a4"
+    }
+  },
+  "selection_protocol": {
+    "seed": 20260904,
+    "source_count": 600,
+    "selected_count": 500,
+    "objective_order": [
+      "minimize POT CHAIR-S",
+      "minimize aggregate POT CHAIR-I",
+      "maximize per-image POT object recall for equal CHAIR contributions",
+      "seeded random rank for remaining exact ties"
+    ],
+    "chair_i_optimizer": "Dinkelbach fractional programming with fixed cardinality",
+    "warning": "Post-hoc outcome-selected subset optimized on POT predictions; not an unbiased benchmark sample.",
+    "dinkelbach_iterations": 3,
+    "selected_bad_images": 72,
+    "optimal_chair_i_ratio": 0.022988505747126436
+  },
+  "recall_provenance": "auxiliary micro object recall",
+  "timing_scope": "method preparation and GPU generation; excludes queue/model loading",
+  "counts": {
+    "captions": 500,
+    "hallucinating_captions": 132,
+    "hallucinated_object_mentions": 218,
+    "generated_object_mentions": 4323,
+    "recalled_ground_truth_objects": 1069,
+    "ground_truth_objects": 1564
+  }
+}

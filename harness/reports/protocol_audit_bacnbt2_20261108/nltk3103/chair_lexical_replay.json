@@ -1,0 +1,35 @@
+{
+  "status": "completed",
+  "scope": "CPU-only archived caption scoring",
+  "versions": {
+    "nltk": "3.10.3",
+    "inflect": "7.5.0",
+    "transformers": "4.57.6"
+  },
+  "old_counts": {
+    "captions": 500,
+    "hallucinating_captions": 280,
+    "hallucinated_object_mentions": 567,
+    "generated_object_mentions": 4944,
+    "recalled_ground_truth_objects": 1070,
+    "ground_truth_objects": 1564
+  },
+  "current_counts": {
+    "captions": 500,
+    "hallucinating_captions": 280,
+    "hallucinated_object_mentions": 567,
+    "generated_object_mentions": 4944,
+    "recalled_ground_truth_objects": 1070,
+    "ground_truth_objects": 1564
+  },
+  "prefix512_counts": {
+    "captions": 500,
+    "hallucinating_captions": 269,
+    "hallucinated_object_mentions": 525,
+    "generated_object_mentions": 4821,
+    "recalled_ground_truth_objects": 1064,
+    "ground_truth_objects": 1564
+  },
+  "different_images": 0,
+  "differences": []
+}

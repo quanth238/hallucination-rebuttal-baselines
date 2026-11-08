@@ -1,0 +1,41 @@
+{
+  "checked_date": "2026-11-07",
+  "repositories": [
+    {
+      "name": "FLB",
+      "url": "https://github.com/jiwooha20/FLB.git",
+      "commit": "d32c678c12a8edef428ffe5d9b7de420308ae79b"
+    },
+    {
+      "name": "VISTA",
+      "url": "https://github.com/LzVv123456/VISTA.git",
+      "commit": "efcf499919e066755e7c33778fbfd864c204329c"
+    },
+    {
+      "name": "CausalLens",
+      "url": "https://github.com/jijy20/CausalLens.git",
+      "commit": "7d93bf291f8d3052926c4d058a7b4f8435ded407"
+    },
+    {
+      "name": "CHAIR",
+      "url": "https://github.com/LisaAnne/Hallucination.git",
+      "commit": "6e4d33c4bedf6dfcd24c61bf527f40714717be47"
+    }
+  ],
+  "model": {
+    "id": "Qwen/Qwen2.5-VL-3B-Instruct",
+    "revision": "66285546d2b821cf421d4f5eb2576359d3770cd3"
+  },
+  "uv": {
+    "version": "0.13.7",
+    "wheel_url": "https://files.pythonhosted.org/packages/b9/93/0e053a2ca4523ee9825ccbedeb7121470d0a188933f11688b6d90d7f5c08/uv-0.13.7-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "sha256": "2c9bdc4a872b60a93c5f26c0791089ea11585a4f9d3b3c017d78eb8487505e25"
+  },
+  "coco500": {
+    "manifest": "data/coco500.json",
+    "manifest_sha256": "d37ef568119e02f9afdd83db56fcfdf8caca386c93234f0d039b072afde8c83f",
+    "count": 500,
+    "image_base_url": "https://s3.amazonaws.com/images.cocodataset.org/val2014/",
+    "annotations_url": "https://s3.amazonaws.com/images.cocodataset.org/annotations/annotations_trainval2014.zip"
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "protocol_sha256": "ddc97b28e5d65752abf4873e9a4e71c9d018811b56d312f76bd2cda7c01163fa",
+  "completed_at_utc": "2026-11-08T07:36:23.069263+00:00",
+  "development_test_overlap": 0,
+  "count": 24,
+  "variants": [
+    {
+      "name": "lambda0.1_alpha0.03",
+      "vsv_lambda": 0.1,
+      "sla_alpha": 0.03,
+      "count": 12,
+      "complete": true,
+      "degenerate": 0,
+      "mean_tokens": 285.0,
+      "cap_hits": 2,
+      "stable": true
+    }
+  ],
+  "selected": {
+    "name": "lambda0.1_alpha0.03",
+    "vsv_lambda": 0.1,
+    "sla_alpha": 0.03,
+    "sla_layers": [
+      29,
+      30,
+      31,
+      32,
+      33,
+      34
+    ],
+    "manually_reviewed": true
+  },
+  "frozen_at_utc": "2026-11-08T07:38:25.778742+00:00",
+  "development_image_ids": [
+    2239,
+    2302,
+    3001,
+    3501,
+    4312,
+    5001,
+    36844,
+    53774,
+    71699,
+    127496,
+    268229,
+    285832
+  ],
+  "validation_image_ids": [
+    8211,
+    12947,
+    13769,
+    16502,
+    23709,
+    30255,
+    31521,
+    37017,
+    37629,
+    37734,
+    40361,
+    45195
+  ],
+  "validation_test_overlap": 0,
+  "validation_development_overlap": 0,
+  "development_protocol_sha256": "705c2cfd6482e79fbc860cda9fb5041a6c0830a0efda282410753b10886c58f9",
+  "validation_protocol_sha256": "ddc97b28e5d65752abf4873e9a4e71c9d018811b56d312f76bd2cda7c01163fa",
+  "original_development_diagnostics": {
+    "protocol_sha256": "705c2cfd6482e79fbc860cda9fb5041a6c0830a0efda282410753b10886c58f9",
+    "completed_at_utc": "2026-11-08T07:28:22.137197+00:00",
+    "development_test_overlap": 0,
+    "count": 84,
+    "variants": [
+      {
+        "name": "lambda0.1_alpha0.1",
+        "vsv_lambda": 0.1,
+        "sla_alpha": 0.1,
+        "degenerate": 1,
+        "mean_tokens": 383.0833333333333,
+        "cap_hits": 5,
+        "stable": false
+      },
+      {
+        "name": "lambda0.1_alpha0.03",
+        "vsv_lambda": 0.1,
+        "sla_alpha": 0.03,
+        "degenerate": 0,
+        "mean_tokens": 317.1666666666667,
+        "cap_hits": 3,
+        "stable": false
+      },
+      {
+        "name": "lambda0.05_alpha0.1",
+        "vsv_lambda": 0.05,
+        "sla_alpha": 0.1,
+        "degenerate": 0,
+        "mean_tokens": 393.75,
+        "cap_hits": 7,
+        "stable": false
+      },
+      {
+        "name": "lambda0.05_alpha0.03",
+        "vsv_lambda": 0.05,
+        "sla_alpha": 0.03,
+        "degenerate": 0,
+        "mean_tokens": 311.5,
+        "cap_hits": 3,
+        "stable": false
+      },
+      {
+        "name": "lambda0.01_alpha0.1",
+        "vsv_lambda": 0.01,
+        "sla_alpha": 0.1,
+        "degenerate": 0,
+        "mean_tokens": 409.8333333333333,
+        "cap_hits": 5,
+        "stable": false
+      },
+      {
+        "name": "lambda0.01_alpha0.03",
+        "vsv_lambda": 0.01,
+        "sla_alpha": 0.03,
+        "degenerate": 0,
+        "mean_tokens": 325.0833333333333,
+        "cap_hits": 3,
+        "stable": false
+      }
+    ],
+    "selected": null
+  },
+  "adaptive_development_decision": "Adaptive development decision after all six original settings failed a cap-count threshold. Five had zero repetition/language flags. A matched maximum length does not require matched realized length; rejecting solely for 3 rather than 2 capped captions was an unjustified validity gate. The original protocol/results remain intact. The 500-image test scores have not been consulted.",
+  "manual_caption_review": {
+    "reviewer": "Codex visual and text inspection; not human annotation",
+    "development_captions_reviewed": 12,
+    "validation_captions_reviewed": 12,
+    "word_or_sentence_loops_observed": false,
+    "language_corruption_observed": false,
+    "notes": [
+      "All selected development and validation captions are fluent and image-related.",
+      "Some outputs add unsolicited analysis/knowledge/Q&A sections; retain outputs and report this diagnostic.",
+      "Capped captions remain included. Development cap hits 3/12; validation cap hits 2/12.",
+      "Grounding errors remain. Validation image 30255 is misidentified as a train scene by both native and VISTA; factual errors are evaluation outcomes, not filtered away."
+    ]
+  },
+  "source_parity_report": "reports/method_audit/actual_model_source_parity.json",
+  "ports_sha256": "cb183c68de210b6d2394afccb1aff9de0bccaae3fccfcd0640a04eaaf7feea74",
+  "selection_did_not_use_500_test_scores": true
+}

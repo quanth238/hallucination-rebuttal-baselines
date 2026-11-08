@@ -1,0 +1,78 @@
+{
+  "name": "vista_qwen_architecture_stability_calibration_v2",
+  "registered_at_utc": "2026-11-08T07:03:55.797163+00:00",
+  "test_manifest_sha256": "d37ef568119e02f9afdd83db56fcfdf8caca386c93234f0d039b072afde8c83f",
+  "development_source": "/Users/quanth238/Documents/ChatGPT/Hallucination/qwen-amber-seeds/QOT_steer/data/benchmarks/qot_tuning_calibration_12.json",
+  "development_source_sha256": "5b46610cc6bcf6e7203fd0fb5bdf37d5432228c68f7dfb43fb1c3f78bf2aee1e",
+  "image_ids": [
+    2239,
+    2302,
+    3001,
+    3501,
+    4312,
+    5001,
+    36844,
+    53774,
+    71699,
+    127496,
+    268229,
+    285832
+  ],
+  "test_overlap_count": 0,
+  "model": "Qwen2.5-VL-3B-Instruct",
+  "prompt": "Please describe this image in detail.",
+  "max_new_tokens": 512,
+  "dtype": "bfloat16",
+  "do_sample": false,
+  "num_beams": 1,
+  "use_fast": false,
+  "sla_layers": [
+    29,
+    30,
+    31,
+    32,
+    33,
+    34
+  ],
+  "variants": [
+    {
+      "name": "lambda0.1_alpha0.1",
+      "vsv_lambda": 0.1,
+      "sla_alpha": 0.1
+    },
+    {
+      "name": "lambda0.1_alpha0.03",
+      "vsv_lambda": 0.1,
+      "sla_alpha": 0.03
+    },
+    {
+      "name": "lambda0.05_alpha0.1",
+      "vsv_lambda": 0.05,
+      "sla_alpha": 0.1
+    },
+    {
+      "name": "lambda0.05_alpha0.03",
+      "vsv_lambda": 0.05,
+      "sla_alpha": 0.03
+    },
+    {
+      "name": "lambda0.01_alpha0.1",
+      "vsv_lambda": 0.01,
+      "sla_alpha": 0.1
+    },
+    {
+      "name": "lambda0.01_alpha0.03",
+      "vsv_lambda": 0.01,
+      "sla_alpha": 0.03
+    }
+  ],
+  "stability_failure": {
+    "max_5gram_count_at_least": 5,
+    "repeated_5gram_fraction_at_least": 0.15,
+    "cjk_character_fraction_above": 0.05
+  },
+  "stability_gate": "No development caption may meet any severe-repetition or language-corruption criterion; average length must be at least half native and cap hits at most native+2. Manually inspect all selected captions.",
+  "selection_rule": "First stable variant in the predeclared order (largest VSV lambda then largest SLA alpha). CHAIR and recall are diagnostic only and are not selection objectives. Both VSV and SLA always enabled.",
+  "source_notes": "Official README recommends new-architecture calibration; preserve raw intermediate lm_head projection and source VSV/PCA. No added RMSNorm, repetition penalty, or test-ID tuning.",
+  "failure_action": "If no variant is stable, do not evaluate the 500 test IDs; inspect a supported-backbone reproduction."
+}

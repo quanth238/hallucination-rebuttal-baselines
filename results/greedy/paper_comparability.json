@@ -1,0 +1,11 @@
+{
+  "status": "greedy_supplement_not_matched_to_sampled_paper_rows",
+  "reason": [
+    "Greedy versus T1 sampling.",
+    "Single global seed versus per-image repository seeds.",
+    "NLTK3.9.2 versus archived parsing reproducible with3.10.3."
+  ],
+  "results_and_original_run_hashes_preserved": true,
+  "replacement_target": "rebuttal/reports/protocol_audit_bacnbt2_20261108/sampled_protocol.json",
+  "latest_potion_row_exact_metadata_available": false
+}

@@ -1,0 +1,9 @@
+# Baseline tracking repository
+
+Read README.md, tracking/snapshot.json, methods/SOURCES.json and the sampled protocol before acting. This repository tracks the existing FLB, VISTA and CausalLens experiments; it does not authorize launching new experiments.
+
+Keep the current sampled runs and frozen method settings. Exact reproduction of historical paper outputs is not required. Do not rerun POTION, add a full Native run, tune on the500 test results, or install continuous monitoring. Preserve the prior greedy outputs as a separate supplementary table.
+
+When the user requests a progress/result update, use the original Mac harness through `python3 tracking/update_results.py --refresh --push` if `.tracking.local.json` is available. This performs one status check/sync and pushes only the managed README/results/snapshot. No background watcher is needed. Keep SSH details and local paths in the ignored local config.
+
+The upstream method snapshots retain their own copyright/license notices. Qwen adaptations and exact executed runners are in harness/. Retain source and artifact hashes; record an actual bug fix separately rather than rewriting historic provenance. Disclose cohort selection, VISTA adaptation/quality limits and RTX4090 versus H100 timing differences.

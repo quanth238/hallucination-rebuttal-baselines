@@ -1,0 +1,4 @@
+nltk==3.10.3
+defusedxml==0.7.1
+
+Installed separately at tools/nltk_3_10_3; do not replace the legacy NLTK3.9.2 environment.

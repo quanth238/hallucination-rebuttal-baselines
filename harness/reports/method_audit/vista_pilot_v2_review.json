@@ -1,0 +1,26 @@
+{
+  "status": "passed_full_cap_reproduction_check",
+  "reviewed_at_utc": "2026-11-08T07:40:25.472308+00:00",
+  "image_ids": [
+    264454,
+    63355,
+    88848
+  ],
+  "old": {
+    "cap_hits": 3,
+    "repetition_or_language_flags": 3
+  },
+  "new": {
+    "cap_hits": 1,
+    "repetition_or_language_flags": 0,
+    "tokens": [
+      471,
+      170,
+      512
+    ],
+    "peak_vram_gib": 7.149207592010498
+  },
+  "frozen_configuration_sha256": "1da8ae83d29733f526c4e1fcd2b2bf1ad980a06981b2e48af1f819b923bdd0d6",
+  "caption_sha256": "475e6d09773388ec41d95f75560f77c6aa7692e22ead52c3e1cd9791c22bbb2d",
+  "review": "Inspected all three captions; original literal word/phrase loops are resolved. Some analysis-style elaboration remains and will be reported, with capped outputs retained. No parameters changed after seeing these pilot captions."
+}

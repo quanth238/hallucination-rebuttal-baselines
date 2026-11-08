@@ -1,0 +1,118 @@
+{
+  "prepared_at_utc": "2026-11-08T11:40:16.793456+00:00",
+  "remote_checked_at_utc": "2026-11-08T11:33:22.721849+00:00",
+  "pipeline": {
+    "status": "running",
+    "stage": "evaluate-flb",
+    "scope": "three_baselines_only"
+  },
+  "greedy": {
+    "regular": {
+      "count": 500,
+      "completed": true,
+      "metrics": {
+        "CHAIR_S": 33.6,
+        "CHAIR_I": 6.05763575769457,
+        "object_recall": 70.84398976982096,
+        "average_tokens": 282.856,
+        "cap_hits": 36,
+        "total_generation_seconds": 4445.845182381978,
+        "peak_vram_gb": 7.1055426597595215,
+        "observed_tokens_per_second": 31.811274166822482
+      },
+      "hashes": {
+        "captions.jsonl": "d032fdf177e87feace8c5aa9baa88d77f8c8d9df258f00a98c14d23b7e10eccf",
+        "run.json": "c8760de41b379742b5bfd390296d6561a6f7ba6a39bf350f7882a0614b6c346d",
+        "scores.json": "6913ce692ac8a003166c507e4abbe969a59a6c8b0bade6d72157d9a54e3bb14d",
+        "per_image_scores.json": "eb8c71ad66864d2d846ec2b1689eb21a96018859d64f1b26706ade2bce0b858e",
+        "completed.json": "4fade7f2218d55d050340118daafdafe77f62eafee2f75db065bfb7bc667e673"
+      }
+    },
+    "flb": {
+      "count": 500,
+      "completed": true,
+      "metrics": {
+        "CHAIR_S": 31.4,
+        "CHAIR_I": 5.691655921900902,
+        "object_recall": 67.77493606138107,
+        "average_tokens": 274.364,
+        "cap_hits": 20,
+        "total_generation_seconds": 4438.142386078136,
+        "peak_vram_gb": 7.1055426597595215,
+        "observed_tokens_per_second": 30.90977892694965
+      },
+      "hashes": {
+        "captions.jsonl": "76f2aef39c8bd031e215837389b692bf037a54c2c889e12a9741cb1fc3f4ec6d",
+        "run.json": "2ffa7cc27a7e01d1efe5d082796646ad0676c7e50d73126d23712e8c87a8f84a",
+        "scores.json": "c4d478ca3303940b638d204086410334db0b758304880df26fcd59ebbe8cc844",
+        "per_image_scores.json": "f56d04a5dddbba79e295aa42c14f2663a77adf0d19e05ee7130b7c9247c4348b",
+        "completed.json": "4fade7f2218d55d050340118daafdafe77f62eafee2f75db065bfb7bc667e673"
+      }
+    },
+    "vista": {
+      "count": 500,
+      "completed": true,
+      "metrics": {
+        "CHAIR_S": 31.0,
+        "CHAIR_I": 5.469245402663285,
+        "object_recall": 68.15856777493606,
+        "average_tokens": 316.788,
+        "cap_hits": 102,
+        "total_generation_seconds": 7848.532994740235,
+        "peak_vram_gb": 7.149168491363525,
+        "observed_tokens_per_second": 20.181351101683482
+      },
+      "hashes": {
+        "captions.jsonl": "bcbba0b33429ac05a7e224244f5e474fb608c72e14c1341d371021719a025ed4",
+        "run.json": "9cf82c444365e45828e4feb170fdc6be2eb5dc4fe8aba45e8c23b5cb9d85c185",
+        "scores.json": "8633b7210899b8514260d12b27b9f6d3abfb1bd75d6ecc9bcf262ab55d8c49f5",
+        "per_image_scores.json": "cfd28b565d094740789c42c9205bf0876c65d6a5f95fdfe26850fd5586d4c15f",
+        "completed.json": "4fade7f2218d55d050340118daafdafe77f62eafee2f75db065bfb7bc667e673"
+      }
+    },
+    "causallens": {
+      "count": 500,
+      "completed": true,
+      "metrics": {
+        "CHAIR_S": 26.400000000000002,
+        "CHAIR_I": 5.042794355771455,
+        "object_recall": 68.35038363171356,
+        "average_tokens": 230.632,
+        "cap_hits": 29,
+        "total_generation_seconds": 4220.5400044916605,
+        "peak_vram_gb": 7.2639946937561035,
+        "observed_tokens_per_second": 27.322570068587503
+      },
+      "hashes": {
+        "captions.jsonl": "9f2bca0e4b21e6b21560e93452d0fca479982e4dd2727f450ddb968b95265346",
+        "run.json": "0ee865dd026d65ed940624a8654f8113d4e7946fb19b15c8df08efe24bdcfb29",
+        "scores.json": "710d16f2f5fb3729f5ad2f503576e373c96a237df07ad126330a507ec3dc6623",
+        "per_image_scores.json": "f40052e97265e96d0d728d04176c1e3d7685ff58de8af998563526c9c68a86c8",
+        "completed.json": "4fade7f2218d55d050340118daafdafe77f62eafee2f75db065bfb7bc667e673"
+      }
+    }
+  },
+  "sampled": {
+    "flb": {
+      "count": 74,
+      "completed": false,
+      "metrics": null,
+      "hashes": {
+        "captions.jsonl": "701f6e30d0c73894d2777928b62de04b7860e8a5b8cedf77bf8ad8ea6ada6fe2",
+        "run.json": "cbc7d4b558458194ef3e35e406d33973572fcbc37fe3ee1f737e4de975b13cd5"
+      }
+    },
+    "vista": {
+      "count": 0,
+      "completed": false,
+      "metrics": null,
+      "hashes": {}
+    },
+    "causallens": {
+      "count": 0,
+      "completed": false,
+      "metrics": null,
+      "hashes": {}
+    }
+  }
+}

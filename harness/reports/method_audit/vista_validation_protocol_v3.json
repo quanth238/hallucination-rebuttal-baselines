@@ -1,0 +1,57 @@
+{
+  "name": "vista_qwen_independent_frozen_candidate_validation_v3",
+  "registered_at_utc": "2026-11-08T07:31:15.168031+00:00",
+  "test_manifest_sha256": "d37ef568119e02f9afdd83db56fcfdf8caca386c93234f0d039b072afde8c83f",
+  "development_source": "/Users/quanth238/Documents/ChatGPT/Hallucination/qwen-amber-seeds/QOT_steer/data/benchmarks/qot_tuning_holdout_38.json",
+  "development_source_sha256": "06e6d21d4a9c2651ba8f25587d7ef7bbaf40a59bed15a77d79d48090cf81d02a",
+  "image_ids": [
+    8211,
+    12947,
+    13769,
+    16502,
+    23709,
+    30255,
+    31521,
+    37017,
+    37629,
+    37734,
+    40361,
+    45195
+  ],
+  "test_overlap_count": 0,
+  "model": "Qwen2.5-VL-3B-Instruct",
+  "prompt": "Please describe this image in detail.",
+  "max_new_tokens": 512,
+  "dtype": "bfloat16",
+  "do_sample": false,
+  "num_beams": 1,
+  "use_fast": false,
+  "sla_layers": [
+    29,
+    30,
+    31,
+    32,
+    33,
+    34
+  ],
+  "variants": [
+    {
+      "name": "lambda0.1_alpha0.03",
+      "vsv_lambda": 0.1,
+      "sla_alpha": 0.03
+    }
+  ],
+  "stability_failure": {
+    "max_5gram_count_at_least": 5,
+    "repeated_5gram_fraction_at_least": 0.15,
+    "cjk_character_fraction_above": 0.05
+  },
+  "stability_gate": "No severe-repetition/language flags; no empty captions; manually inspect all validation captions. Output cap hits and length are diagnostic outcomes, not validity gates.",
+  "selection_rule": "Candidate lambda=.1, alpha=.03 is frozen before validation: first setting in the original grid with zero repetition/language flags. Preserve both VSV and SLA. This validation group does not select/tune parameters.",
+  "source_notes": "Official README recommends new-architecture calibration; preserve raw intermediate lm_head projection and source VSV/PCA. No added RMSNorm, repetition penalty, or test-ID tuning.",
+  "failure_action": "If the frozen candidate fails independent fluency validation, do not run its 500-image evaluation or tune on those test IDs.",
+  "output_name": "vista_validation_v3",
+  "validation_role": "First 12 IDs in the existing 38-image holdout, disjoint from both development and supplied 500. Validate a frozen candidate; do not select among candidates on this group.",
+  "cap_gate": false,
+  "protocol_revision_disclosure": "Adaptive development decision after all six original settings failed a cap-count threshold. Five had zero repetition/language flags. A matched maximum length does not require matched realized length; rejecting solely for 3 rather than 2 capped captions was an unjustified validity gate. The original protocol/results remain intact. The 500-image test scores have not been consulted."
+}

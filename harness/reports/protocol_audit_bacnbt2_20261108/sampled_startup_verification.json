@@ -1,0 +1,40 @@
+{
+  "status": "startup_verified",
+  "pipeline": {
+    "status": "running",
+    "stage": "evaluate-flb",
+    "scope": "three_baselines_only",
+    "excluded_methods": [
+      "potion",
+      "new_full_native_evaluation"
+    ],
+    "command": [
+      "/workspace/rebuttal/envs/qwen/bin/python",
+      "/workspace/rebuttal/control/scripts/run_coco500.py",
+      "--method",
+      "flb",
+      "--paper-protocol",
+      "/workspace/rebuttal/control/reports/protocol_audit_bacnbt2_20261108/sampled_protocol.json",
+      "--output",
+      "/workspace/rebuttal/outputs/flb_coco500_sampled_bacnbt2_v1"
+    ],
+    "log": "/workspace/rebuttal/logs/sampled-evaluate-flb.log",
+    "updated_at_utc": "2026-11-08T11:22:35.052526+00:00"
+  },
+  "checks": {
+    "first_full_image_matches_pilot": true,
+    "runner_hash_matches": true,
+    "do_sample": true,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "repetition_penalty": 1.0,
+    "processor_fast": true,
+    "max_pixels": 1003520,
+    "count": 11,
+    "last_image_id": 335929,
+    "seed_policy": "torch.manual_seed(base_seed + sample_seed_offset + image_id) before image preparation"
+  },
+  "free_disk_gb": 17.327220916748047,
+  "gpu": "NVIDIA GeForce RTX 4090, 7798 MiB, 31 %"
+}

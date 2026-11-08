@@ -1,0 +1,14 @@
+{
+  "upstream_source_blob_hashes_verified": {
+    "FLB": 738,
+    "VISTA": 425,
+    "CausalLens": 763
+  },
+  "executed_source_sha256": {
+    "run_coco500.py": "a6c5d3540820e05d421409825e3b5daeb678e6a52a06d4e77b73e1aeebea0894",
+    "qwen_ports.py": "cb183c68de210b6d2394afccb1aff9de0bccaae3fccfcd0640a04eaaf7feea74",
+    "flb.py": "afef2fa40ea7f864dba0a1d530f3887c8faacfe6ddb03e172c069aba8a770e2a"
+  },
+  "credential_pattern_scan": "passed; no matches",
+  "greedy_result_counts_reaggregated": true
+}

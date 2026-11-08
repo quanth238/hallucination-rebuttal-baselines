@@ -1,0 +1,42 @@
+{
+  "status": "execution_pilots_completed_reviewed",
+  "scope": "three_baselines_only_no_potion",
+  "image_ids": [
+    264454
+  ],
+  "max_new_tokens": 512,
+  "methods": {
+    "flb": {
+      "tokens": 391,
+      "generation_seconds": 13.76257041003555,
+      "caption_checks": {
+        "max_5gram_count": 2,
+        "repeated_5gram_fraction": 0.00911854103343465,
+        "cjk_character_fraction": 0.0,
+        "degenerate": false
+      }
+    },
+    "vista": {
+      "tokens": 309,
+      "generation_seconds": 16.628881109994836,
+      "caption_checks": {
+        "max_5gram_count": 1,
+        "repeated_5gram_fraction": 0.0,
+        "cjk_character_fraction": 0.0,
+        "degenerate": false
+      }
+    },
+    "causallens": {
+      "tokens": 392,
+      "generation_seconds": 16.12098380899988,
+      "caption_checks": {
+        "max_5gram_count": 1,
+        "repeated_5gram_fraction": 0.0,
+        "cjk_character_fraction": 0.0019860973187686196,
+        "degenerate": false
+      }
+    }
+  },
+  "reviewed_at_utc": "2026-11-08T11:22:33.761971+00:00",
+  "note": "Fluent pilot execution is not proof of grounding or full-dataset stability. Preserve all captions, including hallucinations and mixed-language phrases; no test-driven retuning."
+}
