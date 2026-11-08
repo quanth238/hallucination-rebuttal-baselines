@@ -1,6 +1,6 @@
 {
-  "prepared_at_utc": "2026-11-08T14:45:15.482180+00:00",
-  "remote_checked_at_utc": "2026-11-08T14:45:14.272731+00:00",
+  "prepared_at_utc": "2026-11-08T14:56:45.999189+00:00",
+  "remote_checked_at_utc": "2026-11-08T14:56:44.838557+00:00",
   "pipeline": {
     "status": "running",
     "stage": "evaluate-vista",
@@ -230,11 +230,11 @@
       }
     },
     "vista": {
-      "count": 360,
+      "count": 402,
       "completed": false,
       "metrics": null,
       "hashes": {
-        "captions.jsonl": "6f282dcf173f7e9204839e6c5e6fe699bbf90c9696298959d9bf5a8b0d1c4699",
+        "captions.jsonl": "741123335c414af7bc3cd116443a5b12bcd604cb217be2dd3984d2eb3da4906c",
         "run.json": "039a1893549aeeeeeac7732e345c730927b889e1c4fc458d58388f98fa7e54b8"
       }
     },
