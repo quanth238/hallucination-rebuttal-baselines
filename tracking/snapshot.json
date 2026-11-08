@@ -1,6 +1,6 @@
 {
-  "prepared_at_utc": "2026-11-08T13:33:35.906777+00:00",
-  "remote_checked_at_utc": "2026-11-08T13:33:34.381085+00:00",
+  "prepared_at_utc": "2026-11-08T14:06:44.180856+00:00",
+  "remote_checked_at_utc": "2026-11-08T14:06:42.697269+00:00",
   "pipeline": {
     "status": "running",
     "stage": "evaluate-vista",
@@ -200,10 +200,13 @@
   },
   "sampled": {
     "regular": {
-      "count": 0,
+      "count": 3,
       "completed": false,
       "metrics": null,
-      "hashes": {}
+      "hashes": {
+        "captions.jsonl": "26b3abd1b2bfc66daae4910f326bedc742e857485c38c64d7fb32522637d3ffe",
+        "run.json": "4e18f74c164fd417b28b232765d23c58e19a3b237c617bd4cd752edf2b244c14"
+      }
     },
     "flb": {
       "count": 500,
@@ -227,11 +230,11 @@
       }
     },
     "vista": {
-      "count": 116,
+      "count": 224,
       "completed": false,
       "metrics": null,
       "hashes": {
-        "captions.jsonl": "fece66fd11e5b43eb0ca418b978339f3f91b0ba324307bd804c155812ebbb1c8",
+        "captions.jsonl": "df3d3cced1496bc15528e719f79294e25213299a7d38822f087b7945c7588a30",
         "run.json": "039a1893549aeeeeeac7732e345c730927b889e1c4fc458d58388f98fa7e54b8"
       }
     },

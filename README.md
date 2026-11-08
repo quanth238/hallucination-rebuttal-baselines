@@ -2,7 +2,7 @@
 
 Regular, FLB, VISTA and CausalLens with Qwen2.5-VL-3B-Instruct on the same 500 COCO images.
 
-Results snapshot: 2026-11-08 20:33 (UTC+7).
+Results snapshot: 2026-11-08 21:06 (UTC+7).
 
 Both protocols use a 512-token cap and NLTK 3.10.3 scoring.
 
