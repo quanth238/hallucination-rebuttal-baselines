@@ -5,36 +5,51 @@
       "CHAIR_S": 52.6,
       "CHAIR_I": 11.0,
       "object_recall": 66.8,
-      "source": "paper Table1"
+      "source": "paper Table1",
+      "average_tokens": 409.5,
+      "observed_tokens_per_second": 32.38,
+      "timing_source": "paper Table1"
     },
     {
       "method": "FLB",
       "CHAIR_S": 34.0,
       "CHAIR_I": 5.8759913482335975,
       "object_recall": 68.79795396419436,
-      "source": "new sampling T1 run,500 images"
+      "source": "new sampling T1 run,500 images",
+      "average_tokens": 306.522,
+      "observed_tokens_per_second": 30.866434820309635,
+      "timing_source": "RTX4090; image/method preparation plus generation"
     },
     {
       "method": "VISTA",
       "CHAIR_S": 41.8,
       "CHAIR_I": 8.792309232926096,
       "object_recall": 63.68286445012787,
-      "source": "new sampling T1 run,500 images"
+      "source": "new sampling T1 run,500 images",
+      "average_tokens": 349.406,
+      "observed_tokens_per_second": 20.252785132198014,
+      "timing_source": "RTX4090; image/method preparation plus generation"
     },
     {
       "method": "CausalLens",
       "CHAIR_S": 37.2,
       "CHAIR_I": 7.917705735660848,
       "object_recall": 67.07161125319693,
-      "source": "new sampling T1 run,500 images"
+      "source": "new sampling T1 run,500 images",
+      "average_tokens": 326.128,
+      "observed_tokens_per_second": 26.573068804830896,
+      "timing_source": "RTX4090; image/method preparation plus generation"
     },
     {
       "method": "POT (paper)",
       "CHAIR_S": 31.4,
       "CHAIR_I": 5.6,
       "object_recall": 68.16,
-      "source": "paper Table1 POTION row"
+      "source": "paper Table1 POTION row",
+      "average_tokens": 355.1,
+      "observed_tokens_per_second": 23.55,
+      "timing_source": "paper Table1 POTION row"
     }
   ],
-  "note": "Mixed-source summary requested by user. Paper rows are quoted; new method rows use T1. Evaluation settings are not confirmed matched. POT denotes POTION."
+  "note": "Mixed-source summary. Regular/POT rows quote manuscript Table1; POT denotes POTION. Other rows are new T1 runs. Hardware and timing provenance differ, so throughput is not a matched comparison."
 }

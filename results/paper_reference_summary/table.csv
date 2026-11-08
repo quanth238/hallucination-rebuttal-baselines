@@ -1,6 +1,6 @@
-method,CHAIR_S,CHAIR_I,object_recall,source
-Regular (paper),52.6,11.0,66.8,paper Table1
-FLB,34.0,5.8759913482335975,68.79795396419436,"new sampling T1 run,500 images"
-VISTA,41.8,8.792309232926096,63.68286445012787,"new sampling T1 run,500 images"
-CausalLens,37.2,7.917705735660848,67.07161125319693,"new sampling T1 run,500 images"
-POT (paper),31.4,5.6,68.16,paper Table1 POTION row
+method,CHAIR_S,CHAIR_I,object_recall,average_tokens,observed_tokens_per_second,source,timing_source
+Regular (paper),52.6,11.0,66.8,409.5,32.38,paper Table1,paper Table1
+FLB,34.0,5.8759913482335975,68.79795396419436,306.522,30.866434820309635,"new sampling T1 run,500 images",RTX4090; image/method preparation plus generation
+VISTA,41.8,8.792309232926096,63.68286445012787,349.406,20.252785132198014,"new sampling T1 run,500 images",RTX4090; image/method preparation plus generation
+CausalLens,37.2,7.917705735660848,67.07161125319693,326.128,26.573068804830896,"new sampling T1 run,500 images",RTX4090; image/method preparation plus generation
+POT (paper),31.4,5.6,68.16,355.1,23.55,paper Table1 POTION row,paper Table1 POTION row
