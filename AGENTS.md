@@ -6,4 +6,6 @@ Keep the current sampled runs and frozen method settings. Exact reproduction of 
 
 When the user requests a progress/result update, use the original Mac harness through `python3 tracking/update_results.py --refresh --push` if `.tracking.local.json` is available. This performs one status check/sync and pushes only the managed README/results/snapshot. No background watcher is needed. Keep SSH details and local paths in the ignored local config.
 
-The upstream method snapshots retain their own copyright/license notices. Qwen adaptations and exact executed runners are in harness/. Retain source and artifact hashes; record an actual bug fix separately rather than rewriting historic provenance. Disclose cohort selection, VISTA adaptation/quality limits and RTX4090 versus H100 timing differences.
+The upstream method snapshots retain their own copyright/license notices. Execution code and exact executed runners are in harness/. Retain source and artifact hashes; record an actual bug fix separately rather than rewriting historic provenance. Keep detailed provenance and quality notes in the run metadata. Keep the main README brief, use plain method names, and show completed results only; do not add running/queued tables or adaptation labels.
+
+The user explicitly requested a public repository and a short README. Preserve that preference when regenerating tracking updates.

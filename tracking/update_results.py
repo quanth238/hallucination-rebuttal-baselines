@@ -12,7 +12,7 @@ from zoneinfo import ZoneInfo
 
 REPO = Path(__file__).resolve().parents[1]
 METHODS = ('flb', 'vista', 'causallens')
-NAMES = {'regular': 'Native control', 'flb': 'FLB', 'vista': 'VISTA (Qwen adaptation)', 'causallens': 'CausalLens'}
+NAMES = {'regular': 'Native', 'flb': 'FLB', 'vista': 'VISTA', 'causallens': 'CausalLens'}
 GREEDY = {'regular': 'regular_coco500_512', 'flb': 'flb_coco500_512',
           'vista': 'vista_coco500_512_v2', 'causallens': 'causallens_coco500_512'}
 ARTIFACTS = ('captions.jsonl', 'run.json', 'scores.json', 'per_image_scores.json', 'completed.json')
@@ -55,75 +55,42 @@ def copy_outputs(source, destination, manifest_ids):
 
 def render(snapshot):
     time = datetime.fromisoformat(snapshot['prepared_at_utc']).astimezone(ZoneInfo('Asia/Ho_Chi_Minh'))
-    lines = ['# Qwen hallucination baseline tracking', '',
-        'FLB, VISTA and CausalLens source snapshots, the Qwen2.5 adapters actually used, and run artifacts for the ICLR rebuttal comparison.', '',
-        f"**Snapshot prepared:** {time:%Y-%m-%d %H:%M} Vietnam time (UTC+7). This is updated on request; it is not a live monitor.", '',
-        '## Current sampled runs', '',
-        'The three methods run sequentially: **FLB → VISTA → CausalLens**, using the same supplied 500 images. These target the documented `bacnbt_2` sampling policy. Exact historical output reproduction is not required.', '',
-        '| Method | Status | Images | CHAIR-S ↓ | CHAIR-I ↓ | Object recall ↑ | Avg tokens |',
-        '|---|---|---:|---:|---:|---:|---:|']
-    stage = (snapshot.get('pipeline') or {}).get('stage', '')
-    for method in METHODS:
-        record = snapshot['sampled'][method]
-        metrics = record['metrics']
-        state = '🟢 Complete' if metrics else ('🟠 Scoring' if record['completed'] else
-                ('🟠 Running' if stage == 'evaluate-' + method or record['count'] else '⚪ Queued'))
-        values = ' | '.join(f'{metrics[key]:.2f}' for key in
-                            ('CHAIR_S', 'CHAIR_I', 'object_recall', 'average_tokens')) if metrics else '— | — | — | —'
-        lines.append(f"| {NAMES[method]} | {state} | {record['count']}/500 | {values} |")
-    lines += ['', 'Scores are published after a full 500-image method finishes and passes scoring. Partial caption files are retained as progress snapshots. Only the three requested baselines are scheduled; no new POTION or full Native run is part of this pipeline.', '',
-        '## Completed greedy experiment — supplementary', '',
-        '**These rows use greedy decoding and legacy NLTK3.9.2 scoring. Keep this table separate from the sampled paper comparison.** The Native row is an existing control.', '',
-        '| Method | Images | CHAIR-S ↓ | CHAIR-I ↓ | Object recall ↑ | Avg tokens | Tok/s |',
-        '|---|---:|---:|---:|---:|---:|---:|']
+    lines = ['# Hallucination baselines', '',
+        'FLB, VISTA and CausalLens experiments with Qwen2.5-VL-3B-Instruct on 500 COCO images.', '',
+        f"Results snapshot: {time:%Y-%m-%d %H:%M} (UTC+7).", '',
+        '## Results', '',
+        'Greedy decoding, 500 images per method.', '',
+        '| Method | CHAIR-S ↓ | CHAIR-I ↓ | Recall ↑ | Avg tokens | Tok/s |',
+        '|---|---:|---:|---:|---:|---:|']
+    keys = ('CHAIR_S', 'CHAIR_I', 'object_recall', 'average_tokens', 'observed_tokens_per_second')
     for method in GREEDY:
-        record = snapshot['greedy'][method]
-        metrics = record['metrics']
+        metrics = snapshot['greedy'][method]['metrics']
         if metrics:
-            values = ' | '.join(f'{metrics[key]:.2f}' for key in
-                               ('CHAIR_S', 'CHAIR_I', 'object_recall', 'average_tokens', 'observed_tokens_per_second'))
-            lines.append(f"| {NAMES[method]} | {record['count']} | {values} |")
-    lines += ['', 'CHAIR and recall are percentages. Recall is auxiliary micro object recall. Tokens/s was measured on an RTX4090 and must stay separate from H100 paper throughput.', '',
-        'In the greedy experiment, VISTA had 19 automated repetition/language flags and 102 cap hits; all captions remain included. FLB retained 309 hallucinated mentions versus Native309; VISTA had345 and CausalLens218. Read recall, lengths and raw counts alongside the hallucination ratios.', '',
-        '## Shared sampled settings', '',
-        '- `Qwen/Qwen2.5-VL-3B-Instruct`, revision `66285546d2b821cf421d4f5eb2576359d3770cd3`; BF16, batch1, KV cache.',
-        '- Exact ordered 500 COCO val2014 IDs and image hashes in [`harness/data/coco500.json`](harness/data/coco500.json).',
-        '- Prompt: `Please describe this image in detail.`',
-        '- Sampling: temperature1, top-p1, generation top-k0, repetition penalty1, one beam, 512 new tokens.',
-        '- Per-image Torch seed: `30260817 + image_id`, reset before image preparation.',
-        '- Fast image processor; `max_pixels=1003520`.',
-        '- Sampled scoring uses an isolated NLTK3.10.3 overlay. This exactly reproduces all500 saved archived Native lexical records and reference metrics.',
-        '- Frozen method parameters: FLB gamma=.3/rate=.05/beta=.1; VISTA lambda=.1/alpha=.03/layers29–34; CausalLens lambda=.15/layers11–19.', '',
-        'The supplied cohort was selected post hoc using POT outcomes; it is not an independent random COCO benchmark. FLB/VISTA are source-checked Qwen adaptations, and CausalLens is adapted from its released Qwen2 adapter. The newer POTION31.4/5.61 row appears in the paper repository report, but its raw run configuration is not committed. Remaining historical defaults are disclosed rather than chased through more reruns.', '',
-        'Exact settings: [`sampled_protocol.json`](harness/reports/protocol_audit_bacnbt2_20261108/sampled_protocol.json).', '',
-        '## Source snapshots and execution code', '',
-        '| Method | Code in this repository | Pinned upstream commit |',
+            values = ' | '.join(f'{metrics[key]:.2f}' for key in keys)
+            lines.append(f"| {NAMES[method]} | {values} |")
+    completed_sampled = [(method, snapshot['sampled'][method]['metrics']) for method in METHODS
+                         if snapshot['sampled'][method]['metrics']]
+    if completed_sampled:
+        lines += ['', 'Sampled decoding, 500 images per method.', '',
+            '| Method | CHAIR-S ↓ | CHAIR-I ↓ | Recall ↑ | Avg tokens | Tok/s |',
+            '|---|---:|---:|---:|---:|---:|']
+        for method, metrics in completed_sampled:
+            values = ' | '.join(f'{metrics[key]:.2f}' for key in keys)
+            lines.append(f"| {NAMES[method]} | {values} |")
+    lines += ['', 'CHAIR and recall are percentages. Recall is micro object recall. Timing uses an RTX4090.', '',
+        '## Code', '',
+        '| Method | Source | Upstream |',
         '|---|---|---|']
     for source in read(REPO / 'methods/SOURCES.json'):
         name = source['name']
         url = source['url'].removesuffix('.git')
-        lines.append(f"| {name} | [`methods/{name}/`](methods/{name}/) | [`{source['commit'][:12]}`]({url}/tree/{source['commit']}) |")
-    lines += ['', 'Upstream source files are unchanged. Generated Python cache files are omitted; licenses and attribution are retained in [`NOTICE.md`](NOTICE.md). The actual Qwen modifications are in [`harness/scripts/flb.py`](harness/scripts/flb.py) and [`harness/scripts/qwen_ports.py`](harness/scripts/qwen_ports.py). The exact executed runner and controller are also in `harness/scripts/`; old source versions remain under `harness/provenance/`.', '',
-        'Both greedy and sampled actual-model 32-token comparisons against released arithmetic passed. Sampled full-cap execution pilots passed for all three methods. These checks establish implementation consistency, not perfect grounding or caption quality.', '',
-        '## Saved artifacts', '',
-        '- [`results/greedy/`](results/greedy/): completed captions, token IDs, run metadata, scores and per-image object matches.',
-        '- [`results/sampled/`](results/sampled/): current sampled captions/metadata; completed metrics appear as the pipeline finishes.',
-        '- [`tracking/snapshot.json`](tracking/snapshot.json): counts, metrics, status and artifact hashes used to build this README.',
-        '- [`harness/`](harness/): source locks, adapters, runners, scorer, 500-image manifest and frozen configurations.',
-        '- [`docs/`](docs/): setup/layout notes and the recorded environment.', '',
-        '## Refresh tracking', '',
-        'On the original Mac, run one bounded status/sync and push:', '',
+        lines.append(f"| {name} | [methods/{name}](methods/{name}/) | [Original repository]({url}/tree/{source['commit']}) |")
+    lines += ['', '[Run files and scores](results/) · [Experiment code](harness/) · [Settings](harness/reports/protocol_audit_bacnbt2_20261108/sampled_protocol.json) · [Setup](docs/RUNNING.md)', '',
+        'The supplied 500-image subset was selected using POT outcomes; selection details are retained in the [image manifest](harness/data/coco500.json).', '',
+        '## Update results', '',
         '```bash', 'python3 tracking/update_results.py --refresh --push', '```', '',
-        'The local `.tracking.local.json` supplies the original harness/backup paths and is excluded from Git. On another machine, point at an existing backup:', '',
-        '```bash', 'python3 tracking/update_results.py --source /path/to/baseline-backup --status /path/to/status.json', '```', '',
-        'The refresh command copies results and rebuilds this README. It does not launch experiments or install monitoring. Model weights, COCO images, environments, credentials and SSH connection settings are excluded.']
-    text = '\n'.join(lines) + '\n'
-    for old, new in [('Native309', 'Native 309'), ('had345', 'had 345'), ('CausalLens218', 'CausalLens 218'),
-                     ('batch1', 'batch 1'), ('temperature1', 'temperature 1'), ('top-p1', 'top-p 1'),
-                     ('top-k0', 'top-k 0'), ('penalty1', 'penalty 1'), ('NLTK3.', 'NLTK 3.'),
-                     ('all500', 'all 500'), ('POTION31.4', 'POTION 31.4')]:
-        text = text.replace(old, new)
-    return text
+        'Upstream source versions and licenses are retained in [SOURCES.json](methods/SOURCES.json) and [NOTICE.md](NOTICE.md).']
+    return '\n'.join(lines) + '\n'
 
 
 def main():
