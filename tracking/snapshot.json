@@ -1,10 +1,9 @@
 {
-  "prepared_at_utc": "2026-11-08T16:00:14.184950+00:00",
-  "remote_checked_at_utc": "2026-11-08T16:00:12.705264+00:00",
+  "prepared_at_utc": "2026-11-08T22:49:59.258825+00:00",
+  "remote_checked_at_utc": "2026-11-08T22:49:57.691626+00:00",
   "pipeline": {
-    "status": "running",
-    "stage": "evaluate-causallens",
-    "scope": "three_baselines_only"
+    "status": "completed",
+    "scope": "greedy_and_sampled_regular_plus_three_baselines"
   },
   "greedy": {
     "regular": {
@@ -200,12 +199,24 @@
   },
   "sampled": {
     "regular": {
-      "count": 3,
-      "completed": false,
-      "metrics": null,
+      "count": 500,
+      "completed": true,
+      "metrics": {
+        "CHAIR_S": 43.2,
+        "CHAIR_I": 8.089631598936574,
+        "object_recall": 67.07161125319693,
+        "average_tokens": 368.892,
+        "cap_hits": 114,
+        "total_generation_seconds": 5900.868871211947,
+        "peak_vram_gb": 7.105866432189941,
+        "observed_tokens_per_second": 31.25743073191146
+      },
       "hashes": {
-        "captions.jsonl": "26b3abd1b2bfc66daae4910f326bedc742e857485c38c64d7fb32522637d3ffe",
-        "run.json": "4e18f74c164fd417b28b232765d23c58e19a3b237c617bd4cd752edf2b244c14"
+        "captions.jsonl": "64f0bde2cf62856c91ecb4a012b4368b0ac1511dabc40ada37ef8244131240a3",
+        "run.json": "4e18f74c164fd417b28b232765d23c58e19a3b237c617bd4cd752edf2b244c14",
+        "scores.json": "b381b0686bf57b9b08d0c3cf147c74d30f1e5705f73413c976d8579f1c5a5150",
+        "per_image_scores.json": "d655904534eb1318ba29c6dc225d31fd9d8ce06874d76ae78b41ca8d58b851f9",
+        "completed.json": "4fade7f2218d55d050340118daafdafe77f62eafee2f75db065bfb7bc667e673"
       }
     },
     "flb": {
@@ -251,12 +262,24 @@
       }
     },
     "causallens": {
-      "count": 168,
-      "completed": false,
-      "metrics": null,
+      "count": 500,
+      "completed": true,
+      "metrics": {
+        "CHAIR_S": 37.2,
+        "CHAIR_I": 7.917705735660848,
+        "object_recall": 67.07161125319693,
+        "average_tokens": 326.128,
+        "cap_hits": 110,
+        "total_generation_seconds": 6136.438406781061,
+        "peak_vram_gb": 7.2639946937561035,
+        "observed_tokens_per_second": 26.573068804830896
+      },
       "hashes": {
-        "captions.jsonl": "ea7e6e683aaa9b5ec02935369c19415167a38a26d8844f078671b9e001122b4e",
-        "run.json": "365017e560d2f35a1fba60aa3377a599dddc9ef0d7b18153209ea69e42b05d97"
+        "captions.jsonl": "3233e35f6b8270a8ca05902e9aef2774e3878838f366e5a23fa92ce2af40f3f7",
+        "run.json": "365017e560d2f35a1fba60aa3377a599dddc9ef0d7b18153209ea69e42b05d97",
+        "scores.json": "fbc99187312f0c04d97b43218412c1881ea374e171ac989dc3c77c81ca15dafc",
+        "per_image_scores.json": "31c84abea7673a86fb1f3671ec51a110cde35103880537f6a8e56abb0d17213f",
+        "completed.json": "4fade7f2218d55d050340118daafdafe77f62eafee2f75db065bfb7bc667e673"
       }
     }
   }
