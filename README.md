@@ -1,22 +1,29 @@
 # Hallucination baselines
 
-FLB, VISTA and CausalLens experiments with Qwen2.5-VL-3B-Instruct on the same 500 COCO images as the `bacnbt_2` evaluation.
+Regular, FLB, VISTA and CausalLens with Qwen2.5-VL-3B-Instruct on the same 500 COCO images.
 
-Results snapshot: 2026-11-08 18:59 (UTC+7).
+Results snapshot: 2026-11-08 19:23 (UTC+7).
 
-Sampling: temperature 1, top-p 1, top-k 0; 512-token cap; per-image seeds; NLTK 3.10.3 scoring.
+Both protocols use a 512-token cap and NLTK 3.10.3 scoring.
 
-## Repository reference
+## Greedy
 
-| Method | CHAIR-S ↓ | CHAIR-I ↓ | Recall ↑ | Avg tokens |
-|---|---:|---:|---:|---:|
-| Qwen2.5-VL baseline | 53.80 | 10.89 | 68.03 | 408.49 |
+`do_sample=False`, 500 images per method.
 
-Reference reused from [`bacnbt_2`](https://github.com/ngquin102/Hallucination-VLM/blob/458002a12c7158050ee3b0822ed5eb81c9e89c0b/QOT_steer/reports/latest_full_benchmarks_512/README.md#L37-L41); [provenance](results/reference/bacnbt_2_qwen_native.json).
+| Method | CHAIR-S ↓ | CHAIR-I ↓ | Recall ↑ | Avg tokens | Tok/s |
+|---|---:|---:|---:|---:|---:|
+| Regular | 33.60 | 6.06 | 70.84 | 282.86 | 31.81 |
+| FLB | 31.40 | 5.69 | 67.77 | 274.36 | 30.91 |
+| VISTA | 31.00 | 5.47 | 68.16 | 316.79 | 20.18 |
+| CausalLens | 26.40 | 5.04 | 68.35 | 230.63 | 27.32 |
 
-Completed FLB, VISTA and CausalLens scores will be added after the sampled runs finish. [Run files](results/sampled/) · [Progress snapshot](tracking/snapshot.json).
+## Sampling T=1
 
-CHAIR and recall are percentages. Recall is micro object recall. New timings use an RTX4090; reference timing is kept separate.
+`do_sample=True`, temperature 1, top-p 1, top-k 0; 500 images per method.
+
+Completed scores will be added as the sampled runs finish. [Run files](results/sampled/) · [Progress snapshot](tracking/snapshot.json).
+
+CHAIR and recall are percentages. Timing uses an RTX4090. Recorded preprocessing and timing scopes are described in the [evaluation notes](docs/EVALUATION.md).
 
 ## Code
 
@@ -28,7 +35,7 @@ CHAIR and recall are percentages. Recall is micro object recall. New timings use
 
 [Run files and scores](results/) · [Experiment code](harness/) · [Evaluation notes](docs/EVALUATION.md) · [Setup](docs/RUNNING.md)
 
-The earlier [greedy results](results/greedy/) are a separate supplementary experiment.
+[Verified greedy scores](results/greedy_verified/) retain the original [captions and run records](results/greedy/). Archived repository reference values remain in [results/reference/](results/reference/).
 
 The supplied 500-image subset was selected using POT outcomes; selection details are retained in the [image manifest](harness/data/coco500.json).
 

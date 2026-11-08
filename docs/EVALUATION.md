@@ -1,11 +1,28 @@
-# Evaluation settings
+# Greedy and T=1 sampling
 
-The primary comparison uses the documented sampling policy from `ngquin102/Hallucination-VLM`, branch `bacnbt_2`, commit 458002a12c7158050ee3b0822ed5eb81c9e89c0b: Qwen2.5-VL-3B, the supplied 500 images and prompt, T=1/top-p=1/top-k=0, per-image Torch seed 30260817+image_id, and a 512-token quality cap. New method rows use repetition penalty 1.0 as specified by the POT report. CHAIR uses the repository utility with NLTK 3.10.3; archived parsing and reference metrics reproduce exactly.
+The comparison covers Regular, FLB, VISTA and CausalLens on the supplied 500 COCO images, using the same prompt and a 512-token cap. All current scores use NLTK 3.10.3.
 
-The Qwen reference row is imported from the branch's archived Native output and first 512-token scoring; its provenance and raw-output hash are in `results/reference/bacnbt_2_qwen_native.json`. It is not a newly generated 4090 control. Native source inherits checkpoint generation defaults (1.05 repetition penalty on the current pinned checkpoint), while the POT report specifies 1.0; historical model revision/default metadata were not fully recorded. These remaining differences are retained in metadata rather than addressed through extra matching runs.
+| Protocol | Token selection | Generation settings |
+|---|---|---|
+| Greedy | `do_sample=False` | One beam, repetition penalty 1 |
+| Sampling T=1 | `do_sample=True` | Temperature 1, top-p 1, top-k 0, repetition penalty 1 |
 
-The older greedy results remain under `results/greedy/`; they are supplementary and are not the primary sampled comparison. New results are under `results/sampled/`. The original greedy scores and source/run hashes are preserved.
+The temperature value alone does not determine whether decoding is greedy. The sampling flag controls token selection.
 
-The repository reference timing came from a 1024-cap H100 run, while the new runs measure direct 512 generation on an RTX4090. Do not mix these throughput values or infer a hardware-independent speed advantage.
+## Greedy results
 
-Use measured outputs without tuning parameters to reproduce a target score. Keep all 500 images and all captions. The supplied cohort was selected post hoc using POT outcomes; the manifest retains that provenance. Exact historical output reproduction is not required.
+All four methods have 500 complete captions. Their original captions, run metadata and scores remain unchanged in `results/greedy/`. CPU-only rescoring with NLTK 3.10.3 is saved separately in `results/greedy_verified/`. The README uses the rescored values. No repeated greedy generation was needed.
+
+## Sampling runs
+
+FLB resumes from its 269-image checkpoint, followed by VISTA and CausalLens with frozen method parameters. A Regular T=1 control follows on the same RTX4090 and under the identical sampled settings. Per-image Torch seed is 30260817+image_id.
+
+The existing three-method runner and policy are unchanged. The separate Regular runner and scope extension preserve earlier source/run hashes. `run_dual_decoding.py` executes the stages sequentially and creates `reports/dual_decoding_coco500/` when all sampled rows finish. It includes per-method differences from the saved greedy scores.
+
+## Reading the comparison
+
+These are two recorded evaluation protocols. The greedy runs use the slow image processor; the sampled runs use the fast processor. All recorded processed images fit below the sampled pixel cap, but resizing arithmetic can differ. Greedy timing excludes image preparation; sampled timing includes it. The results therefore are not a strict decoder-only ablation. Keep the actual configuration and timing scope when interpreting differences.
+
+The supplied 500-image cohort was selected post hoc using POT outcomes; the manifest retains that provenance. Keep every caption, including quality flags. Detailed settings and hashes are retained in each run.json and in the verification reports.
+
+Archived repository references remain under `results/reference/`. Historical H100 throughput is not combined with the new RTX4090 timing. The new sampled Regular row is the control for the new sampled method rows; it explicitly uses repetition penalty 1. No POTION generation is included.

@@ -11,8 +11,8 @@ import sys
 from zoneinfo import ZoneInfo
 
 REPO = Path(__file__).resolve().parents[1]
-METHODS = ('flb', 'vista', 'causallens')
-NAMES = {'regular': 'Native', 'flb': 'FLB', 'vista': 'VISTA', 'causallens': 'CausalLens'}
+METHODS = ('regular', 'flb', 'vista', 'causallens')
+NAMES = {'regular': 'Regular', 'flb': 'FLB', 'vista': 'VISTA', 'causallens': 'CausalLens'}
 GREEDY = {'regular': 'regular_coco500_512', 'flb': 'flb_coco500_512',
           'vista': 'vista_coco500_512_v2', 'causallens': 'causallens_coco500_512'}
 ARTIFACTS = ('captions.jsonl', 'run.json', 'scores.json', 'per_image_scores.json', 'completed.json')
@@ -56,30 +56,32 @@ def copy_outputs(source, destination, manifest_ids):
 def render(snapshot):
     time = datetime.fromisoformat(snapshot['prepared_at_utc']).astimezone(ZoneInfo('Asia/Ho_Chi_Minh'))
     lines = ['# Hallucination baselines', '',
-        'FLB, VISTA and CausalLens experiments with Qwen2.5-VL-3B-Instruct on the same 500 COCO images as the `bacnbt_2` evaluation.', '',
+        'Regular, FLB, VISTA and CausalLens with Qwen2.5-VL-3B-Instruct on the same 500 COCO images.', '',
         f"Results snapshot: {time:%Y-%m-%d %H:%M} (UTC+7).", '',
-        'Sampling: temperature 1, top-p 1, top-k 0; 512-token cap; per-image seeds; NLTK 3.10.3 scoring.', '',
-        '## Repository reference', '',
-        '| Method | CHAIR-S ↓ | CHAIR-I ↓ | Recall ↑ | Avg tokens |',
-        '|---|---:|---:|---:|---:|']
-    keys = ('CHAIR_S', 'CHAIR_I', 'object_recall', 'average_tokens')
-    reference = read(REPO / 'results/reference/bacnbt_2_qwen_native.json')
-    if reference:
-        values = ' | '.join(f"{reference['metrics'][key]:.2f}" for key in keys)
-        lines.append(f"| Qwen2.5-VL baseline | {values} |")
-        lines += ['', f"Reference reused from [`bacnbt_2`]({reference['source_url']}); [provenance](results/reference/bacnbt_2_qwen_native.json)."]
+        'Both protocols use a 512-token cap and NLTK 3.10.3 scoring.', '',
+        '## Greedy', '', '`do_sample=False`, 500 images per method.', '',
+        '| Method | CHAIR-S ↓ | CHAIR-I ↓ | Recall ↑ | Avg tokens | Tok/s |',
+        '|---|---:|---:|---:|---:|---:|']
+    keys = ('CHAIR_S', 'CHAIR_I', 'object_recall', 'average_tokens', 'observed_tokens_per_second')
+    for method in METHODS:
+        record = (snapshot.get('greedy_verified') or snapshot['greedy'])[method]
+        metrics = record['metrics']
+        if metrics:
+            values = ' | '.join(f'{metrics[key]:.2f}' for key in keys)
+            lines.append(f"| {NAMES[method]} | {values} |")
+    lines += ['', '## Sampling T=1', '', '`do_sample=True`, temperature1, top-p1, top-k0;500 images per method.']
     completed_sampled = [(method, snapshot['sampled'][method]['metrics']) for method in METHODS
                          if snapshot['sampled'][method]['metrics']]
     if completed_sampled:
-        lines += ['', '## Baseline results', '', 'Sampled decoding, 500 images per method.', '',
+        lines += ['',
             '| Method | CHAIR-S ↓ | CHAIR-I ↓ | Recall ↑ | Avg tokens | Tok/s |',
             '|---|---:|---:|---:|---:|---:|']
         for method, metrics in completed_sampled:
-            values = ' | '.join(f'{metrics[key]:.2f}' for key in (*keys, 'observed_tokens_per_second'))
+            values = ' | '.join(f'{metrics[key]:.2f}' for key in keys)
             lines.append(f"| {NAMES[method]} | {values} |")
     else:
-        lines += ['', 'Completed FLB, VISTA and CausalLens scores will be added after the sampled runs finish. [Run files](results/sampled/) · [Progress snapshot](tracking/snapshot.json).']
-    lines += ['', 'CHAIR and recall are percentages. Recall is micro object recall. New timings use an RTX4090; reference timing is kept separate.', '',
+        lines += ['', 'Completed scores will be added as the sampled runs finish. [Run files](results/sampled/) · [Progress snapshot](tracking/snapshot.json).']
+    lines += ['', 'CHAIR and recall are percentages. Timing uses an RTX4090. Recorded preprocessing and timing scopes are described in the [evaluation notes](docs/EVALUATION.md).', '',
         '## Code', '',
         '| Method | Source | Upstream |',
         '|---|---|---|']
@@ -88,12 +90,12 @@ def render(snapshot):
         url = source['url'].removesuffix('.git')
         lines.append(f"| {name} | [methods/{name}](methods/{name}/) | [Original repository]({url}/tree/{source['commit']}) |")
     lines += ['', '[Run files and scores](results/) · [Experiment code](harness/) · [Evaluation notes](docs/EVALUATION.md) · [Setup](docs/RUNNING.md)', '',
-        'The earlier [greedy results](results/greedy/) are a separate supplementary experiment.', '',
+        '[Verified greedy scores](results/greedy_verified/) retain the original [captions and run records](results/greedy/). Archived repository reference values remain in [results/reference/](results/reference/).', '',
         'The supplied 500-image subset was selected using POT outcomes; selection details are retained in the [image manifest](harness/data/coco500.json).', '',
         '## Update results', '',
         '```bash', 'python3 tracking/update_results.py --refresh --push', '```', '',
         'Upstream source versions and licenses are retained in [SOURCES.json](methods/SOURCES.json) and [NOTICE.md](NOTICE.md).']
-    return '\n'.join(lines) + '\n'
+    return ('\n'.join(lines) + '\n').replace('temperature1', 'temperature 1').replace('top-p1', 'top-p 1').replace('top-k0;500', 'top-k 0; 500')
 
 
 def main():
@@ -125,11 +127,34 @@ def main():
     snapshot = {'prepared_at_utc': datetime.now(timezone.utc).isoformat(),
         'remote_checked_at_utc': (status or {}).get('checked_at_utc'),
         'pipeline': {key: pipeline[key] for key in ('status', 'stage', 'scope') if key in pipeline},
-        'greedy': {}, 'sampled': {}}
+        'greedy': {}, 'greedy_verified': {}, 'sampled': {}}
     for method, folder in GREEDY.items():
         snapshot['greedy'][method] = copy_outputs(source / 'outputs' / folder, REPO / 'results/greedy' / method, ids)
     for method in METHODS:
         snapshot['sampled'][method] = copy_outputs(source / 'outputs' / f'{method}_coco500_sampled_bacnbt2_v1', REPO / 'results/sampled' / method, ids)
+    rescored = source / 'reports/greedy_protocol_check_20261108'
+    proof = read(rescored / 'comparison.json')
+    if proof:
+        target = REPO / 'results/greedy_verified'
+        target.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(rescored / 'comparison.json', target / 'comparison.json')
+        for row in proof['results']:
+            method = row['method']
+            assert snapshot['greedy'][method]['hashes']['captions.jsonl'] == row['original_artifact_sha256']['captions.jsonl']
+            assert row['counts']['captions'] == 500 and row['scorer_environment']['nltk'] == '3.10.3'
+            destination = target / method
+            destination.mkdir(exist_ok=True)
+            for name in ('scores.json', 'per_image_scores.json'):
+                shutil.copy2(rescored / method / name, destination / name)
+            snapshot['greedy_verified'][method] = {'count': 500, 'metrics': row['metrics'],
+                'counts': row['counts'], 'scorer_environment': row['scorer_environment'],
+                'caption_source': f'results/greedy/{method}/captions.jsonl'}
+    dual = source / 'reports/dual_decoding_coco500'
+    if (dual / 'comparison.json').exists():
+        destination = REPO / 'results/dual_decoding'
+        destination.mkdir(exist_ok=True)
+        for name in ('comparison.json', 'comparison.csv', 'README.md'):
+            shutil.copy2(dual / name, destination / name)
     for variant, folder in [('greedy', 'coco500_matched_v2'), ('sampled', 'coco500_sampled_bacnbt2_v1')]:
         for name in ('comparison.csv', 'comparison.json', 'paper_comparability.json'):
             path = source / 'reports' / folder / name

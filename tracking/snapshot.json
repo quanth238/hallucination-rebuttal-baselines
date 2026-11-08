@@ -1,6 +1,6 @@
 {
-  "prepared_at_utc": "2026-11-08T11:59:57.038415+00:00",
-  "remote_checked_at_utc": "2026-11-08T11:57:23.441371+00:00",
+  "prepared_at_utc": "2026-11-08T12:23:07.718321+00:00",
+  "remote_checked_at_utc": "2026-11-08T12:23:06.586789+00:00",
   "pipeline": {
     "status": "running",
     "stage": "evaluate-flb",
@@ -92,13 +92,125 @@
       }
     }
   },
-  "sampled": {
+  "greedy_verified": {
+    "regular": {
+      "count": 500,
+      "metrics": {
+        "CHAIR_S": 33.6,
+        "CHAIR_I": 6.05763575769457,
+        "object_recall": 70.84398976982096,
+        "average_tokens": 282.856,
+        "cap_hits": 36,
+        "total_generation_seconds": 4445.845182381978,
+        "peak_vram_gb": 7.1055426597595215,
+        "observed_tokens_per_second": 31.811274166822482
+      },
+      "counts": {
+        "captions": 500,
+        "hallucinating_captions": 168,
+        "hallucinated_object_mentions": 309,
+        "generated_object_mentions": 5101,
+        "recalled_ground_truth_objects": 1108,
+        "ground_truth_objects": 1564
+      },
+      "scorer_environment": {
+        "nltk": "3.10.3",
+        "inflect": "7.5.0"
+      },
+      "caption_source": "results/greedy/regular/captions.jsonl"
+    },
     "flb": {
-      "count": 204,
+      "count": 500,
+      "metrics": {
+        "CHAIR_S": 31.4,
+        "CHAIR_I": 5.691655921900902,
+        "object_recall": 67.77493606138107,
+        "average_tokens": 274.364,
+        "cap_hits": 20,
+        "total_generation_seconds": 4438.142386078136,
+        "peak_vram_gb": 7.1055426597595215,
+        "observed_tokens_per_second": 30.90977892694965
+      },
+      "counts": {
+        "captions": 500,
+        "hallucinating_captions": 157,
+        "hallucinated_object_mentions": 309,
+        "generated_object_mentions": 5429,
+        "recalled_ground_truth_objects": 1060,
+        "ground_truth_objects": 1564
+      },
+      "scorer_environment": {
+        "nltk": "3.10.3",
+        "inflect": "7.5.0"
+      },
+      "caption_source": "results/greedy/flb/captions.jsonl"
+    },
+    "vista": {
+      "count": 500,
+      "metrics": {
+        "CHAIR_S": 31.0,
+        "CHAIR_I": 5.467511885895404,
+        "object_recall": 68.15856777493606,
+        "average_tokens": 316.788,
+        "cap_hits": 102,
+        "total_generation_seconds": 7848.532994740235,
+        "peak_vram_gb": 7.149168491363525,
+        "observed_tokens_per_second": 20.181351101683482
+      },
+      "counts": {
+        "captions": 500,
+        "hallucinating_captions": 155,
+        "hallucinated_object_mentions": 345,
+        "generated_object_mentions": 6310,
+        "recalled_ground_truth_objects": 1066,
+        "ground_truth_objects": 1564
+      },
+      "scorer_environment": {
+        "nltk": "3.10.3",
+        "inflect": "7.5.0"
+      },
+      "caption_source": "results/greedy/vista/captions.jsonl"
+    },
+    "causallens": {
+      "count": 500,
+      "metrics": {
+        "CHAIR_S": 26.400000000000002,
+        "CHAIR_I": 5.042794355771455,
+        "object_recall": 68.35038363171356,
+        "average_tokens": 230.632,
+        "cap_hits": 29,
+        "total_generation_seconds": 4220.5400044916605,
+        "peak_vram_gb": 7.2639946937561035,
+        "observed_tokens_per_second": 27.322570068587503
+      },
+      "counts": {
+        "captions": 500,
+        "hallucinating_captions": 132,
+        "hallucinated_object_mentions": 218,
+        "generated_object_mentions": 4323,
+        "recalled_ground_truth_objects": 1069,
+        "ground_truth_objects": 1564
+      },
+      "scorer_environment": {
+        "nltk": "3.10.3",
+        "inflect": "7.5.0"
+      },
+      "caption_source": "results/greedy/causallens/captions.jsonl"
+    }
+  },
+  "sampled": {
+    "regular": {
+      "count": 0,
+      "completed": false,
+      "metrics": null,
+      "hashes": {}
+    },
+    "flb": {
+      "count": 289,
       "completed": false,
       "metrics": null,
       "hashes": {
-        "captions.jsonl": "cfe681fc3863171566ca4f0ed0698046f92531c5c323be8471a55c28446b46f2",
+        "captions.jsonl": "3ed9dada5d84a7afbb92219c792a2090df739a116ad6742bfecddb81ac51c341",
         "run.json": "cbc7d4b558458194ef3e35e406d33973572fcbc37fe3ee1f737e4de975b13cd5"
       }
     },
