@@ -2,7 +2,7 @@
 
 Regular, FLB, VISTA and CausalLens with Qwen2.5-VL-3B-Instruct on the same 500 COCO images.
 
-Results snapshot: 2026-11-08 21:56 (UTC+7).
+Results snapshot: 2026-11-08 23:00 (UTC+7).
 
 Both protocols use a 512-token cap and NLTK 3.10.3 scoring.
 
@@ -24,6 +24,7 @@ Both protocols use a 512-token cap and NLTK 3.10.3 scoring.
 | Method | CHAIR-S ↓ | CHAIR-I ↓ | Recall ↑ | Avg tokens | Tok/s |
 |---|---:|---:|---:|---:|---:|
 | FLB | 34.00 | 5.88 | 68.80 | 306.52 | 30.87 |
+| VISTA | 41.80 | 8.79 | 63.68 | 349.41 | 20.25 |
 
 CHAIR and recall are percentages. Timing uses an RTX4090. Recorded preprocessing and timing scopes are described in the [evaluation notes](docs/EVALUATION.md).
 
