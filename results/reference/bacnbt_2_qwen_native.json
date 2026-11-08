@@ -1,0 +1,73 @@
+{
+  "source_repository": "https://github.com/ngquin102/Hallucination-VLM",
+  "source_branch": "bacnbt_2",
+  "source_commit": "458002a12c7158050ee3b0822ed5eb81c9e89c0b",
+  "source_url": "https://github.com/ngquin102/Hallucination-VLM/blob/458002a12c7158050ee3b0822ed5eb81c9e89c0b/QOT_steer/reports/latest_full_benchmarks_512/README.md#L37-L41",
+  "method": "Qwen2.5-VL baseline",
+  "origin": "Archived repository reference; reused without new Native generation.",
+  "configuration": {
+    "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+    "dataset": "COCO",
+    "dataset_revision": null,
+    "dataset_task": "posthoc_pot_optimized_chair_evaluation",
+    "manifest": "QOT_steer/data/benchmarks/coco_val2014_pot_best_chair_500_seed_20260904.json",
+    "manifest_sha256": "d37ef568119e02f9afdd83db56fcfdf8caca386c93234f0d039b072afde8c83f",
+    "prompt": "Please describe this image in detail.",
+    "decoding": "direct_sampling",
+    "do_sample": true,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "base_seed": 20260817,
+    "sample_seed_offset": 10000000,
+    "max_new_tokens": 1024,
+    "max_pixels": 1003520,
+    "internvl_max_patches": 12,
+    "requested_count": 500,
+    "object_vocab": {
+      "mode": "default",
+      "size": 109,
+      "default_size": 109,
+      "extra_source": null,
+      "extra_source_sha256": null
+    }
+  },
+  "reported_generation": {
+    "count": 500,
+    "max_new_tokens": 512,
+    "source_max_new_tokens": 1024,
+    "evaluation_mode": "posthoc_first_512_token_ids",
+    "mean_tokens": 408.494,
+    "cap_hits": 159,
+    "source_observed_tokens_per_second": 66.1386913344324,
+    "timing_note": "Throughput is from the source 1024-cap run; exact 512-cap wall time was not measured."
+  },
+  "metrics": {
+    "CHAIR_S": 53.800000000000004,
+    "CHAIR_I": 10.889856876166771,
+    "object_recall": 68.03069053708441,
+    "average_tokens": 408.494
+  },
+  "counts": {
+    "captions": 500,
+    "hallucinating_captions": 269,
+    "hallucinated_object_mentions": 525,
+    "generated_object_mentions": 4821,
+    "recalled_ground_truth_objects": 1064,
+    "ground_truth_objects": 1564
+  },
+  "provenance": {
+    "source_jsonl": "QOT_steer/outputs/qwen25vl3b_coco500_pot_selected_1024/regular.jsonl",
+    "source_jsonl_sha256": "b5ebccc1a1382b50f98aecbb101f2e334c6a8905076921f1f521d215cd98dda6",
+    "source_generation_summary": "QOT_steer/outputs/qwen25vl3b_coco500_pot_selected_1024/regular.generation_summary.json",
+    "source_generation_summary_sha256": "d5a8fb922704ad7043796962ce383b659a1b484b8dc797fc8df88e467ed378d4",
+    "run_fingerprint": "edd98e6ac85240bb9d07455893054f44102146a439f1d4ae857c0aac1f4c9c3a"
+  },
+  "scorer_verification": {
+    "nltk": "3.10.3",
+    "exact_full500_lexical_replay": true,
+    "prefix512_metrics_match": true
+  },
+  "timing": "Historical source-run H100 throughput is excluded from the new RTX4090 comparison.",
+  "historical_repetition_penalty_note": "Native source inherits checkpoint defaults;1.05 on the currently pinned checkpoint, not explicitly logged historically. New method rows use1.0 as specified by the repository POT report."
+}

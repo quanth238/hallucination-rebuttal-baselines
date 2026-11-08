@@ -9,3 +9,5 @@ When the user requests a progress/result update, use the original Mac harness th
 The upstream method snapshots retain their own copyright/license notices. Execution code and exact executed runners are in harness/. Retain source and artifact hashes; record an actual bug fix separately rather than rewriting historic provenance. Keep detailed provenance and quality notes in the run metadata. Keep the main README brief, use plain method names, and show completed results only; do not add running/queued tables or adaptation labels.
 
 The user explicitly requested a public repository and a short README. Preserve that preference when regenerating tracking updates.
+
+Use the sampled bacnbt_2 comparison as the primary results view. Keep the archived repository Qwen reference row in results/reference/ with its provenance; keep older greedy scores in results/greedy/ rather than the main README table. Only completed new sampled methods enter the main table.

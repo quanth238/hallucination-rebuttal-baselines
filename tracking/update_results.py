@@ -56,28 +56,30 @@ def copy_outputs(source, destination, manifest_ids):
 def render(snapshot):
     time = datetime.fromisoformat(snapshot['prepared_at_utc']).astimezone(ZoneInfo('Asia/Ho_Chi_Minh'))
     lines = ['# Hallucination baselines', '',
-        'FLB, VISTA and CausalLens experiments with Qwen2.5-VL-3B-Instruct on 500 COCO images.', '',
+        'FLB, VISTA and CausalLens experiments with Qwen2.5-VL-3B-Instruct on the same 500 COCO images as the `bacnbt_2` evaluation.', '',
         f"Results snapshot: {time:%Y-%m-%d %H:%M} (UTC+7).", '',
-        '## Results', '',
-        'Greedy decoding, 500 images per method.', '',
-        '| Method | CHAIR-S ↓ | CHAIR-I ↓ | Recall ↑ | Avg tokens | Tok/s |',
-        '|---|---:|---:|---:|---:|---:|']
-    keys = ('CHAIR_S', 'CHAIR_I', 'object_recall', 'average_tokens', 'observed_tokens_per_second')
-    for method in GREEDY:
-        metrics = snapshot['greedy'][method]['metrics']
-        if metrics:
-            values = ' | '.join(f'{metrics[key]:.2f}' for key in keys)
-            lines.append(f"| {NAMES[method]} | {values} |")
+        'Sampling: temperature 1, top-p 1, top-k 0; 512-token cap; per-image seeds; NLTK 3.10.3 scoring.', '',
+        '## Repository reference', '',
+        '| Method | CHAIR-S ↓ | CHAIR-I ↓ | Recall ↑ | Avg tokens |',
+        '|---|---:|---:|---:|---:|']
+    keys = ('CHAIR_S', 'CHAIR_I', 'object_recall', 'average_tokens')
+    reference = read(REPO / 'results/reference/bacnbt_2_qwen_native.json')
+    if reference:
+        values = ' | '.join(f"{reference['metrics'][key]:.2f}" for key in keys)
+        lines.append(f"| Qwen2.5-VL baseline | {values} |")
+        lines += ['', f"Reference reused from [`bacnbt_2`]({reference['source_url']}); [provenance](results/reference/bacnbt_2_qwen_native.json)."]
     completed_sampled = [(method, snapshot['sampled'][method]['metrics']) for method in METHODS
                          if snapshot['sampled'][method]['metrics']]
     if completed_sampled:
-        lines += ['', 'Sampled decoding, 500 images per method.', '',
+        lines += ['', '## Baseline results', '', 'Sampled decoding, 500 images per method.', '',
             '| Method | CHAIR-S ↓ | CHAIR-I ↓ | Recall ↑ | Avg tokens | Tok/s |',
             '|---|---:|---:|---:|---:|---:|']
         for method, metrics in completed_sampled:
-            values = ' | '.join(f'{metrics[key]:.2f}' for key in keys)
+            values = ' | '.join(f'{metrics[key]:.2f}' for key in (*keys, 'observed_tokens_per_second'))
             lines.append(f"| {NAMES[method]} | {values} |")
-    lines += ['', 'CHAIR and recall are percentages. Recall is micro object recall. Timing uses an RTX4090.', '',
+    else:
+        lines += ['', 'Completed FLB, VISTA and CausalLens scores will be added after the sampled runs finish. [Run files](results/sampled/) · [Progress snapshot](tracking/snapshot.json).']
+    lines += ['', 'CHAIR and recall are percentages. Recall is micro object recall. New timings use an RTX4090; reference timing is kept separate.', '',
         '## Code', '',
         '| Method | Source | Upstream |',
         '|---|---|---|']
@@ -85,7 +87,8 @@ def render(snapshot):
         name = source['name']
         url = source['url'].removesuffix('.git')
         lines.append(f"| {name} | [methods/{name}](methods/{name}/) | [Original repository]({url}/tree/{source['commit']}) |")
-    lines += ['', '[Run files and scores](results/) · [Experiment code](harness/) · [Settings](harness/reports/protocol_audit_bacnbt2_20261108/sampled_protocol.json) · [Setup](docs/RUNNING.md)', '',
+    lines += ['', '[Run files and scores](results/) · [Experiment code](harness/) · [Evaluation notes](docs/EVALUATION.md) · [Setup](docs/RUNNING.md)', '',
+        'The earlier [greedy results](results/greedy/) are a separate supplementary experiment.', '',
         'The supplied 500-image subset was selected using POT outcomes; selection details are retained in the [image manifest](harness/data/coco500.json).', '',
         '## Update results', '',
         '```bash', 'python3 tracking/update_results.py --refresh --push', '```', '',

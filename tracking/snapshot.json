@@ -1,6 +1,6 @@
 {
-  "prepared_at_utc": "2026-11-08T11:40:16.793456+00:00",
-  "remote_checked_at_utc": "2026-11-08T11:33:22.721849+00:00",
+  "prepared_at_utc": "2026-11-08T11:59:57.038415+00:00",
+  "remote_checked_at_utc": "2026-11-08T11:57:23.441371+00:00",
   "pipeline": {
     "status": "running",
     "stage": "evaluate-flb",
@@ -94,11 +94,11 @@
   },
   "sampled": {
     "flb": {
-      "count": 74,
+      "count": 204,
       "completed": false,
       "metrics": null,
       "hashes": {
-        "captions.jsonl": "701f6e30d0c73894d2777928b62de04b7860e8a5b8cedf77bf8ad8ea6ada6fe2",
+        "captions.jsonl": "cfe681fc3863171566ca4f0ed0698046f92531c5c323be8471a55c28446b46f2",
         "run.json": "cbc7d4b558458194ef3e35e406d33973572fcbc37fe3ee1f737e4de975b13cd5"
       }
     },
