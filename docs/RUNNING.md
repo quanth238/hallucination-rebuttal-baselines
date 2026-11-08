@@ -21,7 +21,7 @@ RUN_ROOT/
 
 The included Vast environment script targets `/workspace/rebuttal`. Use existing assets and the original environment for current runs. Base dependencies are in `harness/pyproject.toml` and `harness/uv.lock`; the sampled scorer additionally uses the isolated NLTK3.10.3/defusedxml overlay described in `nltk-overlay.txt`. The recorded installed environment is `environment_v2.txt`.
 
-The active controller is `harness/scripts/run_sampled_baselines.py`, with `harness/vast/rebuttal-sampled-baselines.conf`. It schedules only FLB, VISTA and CausalLens, with scoring and report generation after each method. It never launches a new POTION or full Native evaluation. The source audit script is invoked with `--sampled-baselines`; other legacy code paths are retained only as historical source.
+The active parent controller is `harness/scripts/run_dual_decoding.py`, which invokes `run_sampled_baselines.py` for the preserved method checkpoints, with `harness/vast/rebuttal-sampled-baselines.conf`. It follows the normal FLB, VISTA, CausalLens, Regular T1 sequence and reuses completed outputs. It never launches POTION. The source audit script is invoked with `--sampled-baselines`; other legacy code paths are retained only as historical source.
 
 Only set up a new runtime when an experiment is explicitly needed. Do not launch a duplicate of the existing pipeline. Source/audit/frozen configuration files under `harness/reports/` correspond to both CONTROL/reports and RUN_ROOT/reports in the original layout. The CHAIR lexical replay reads the archived reference files from the original runtime; compact proof reports are included here, while the large archived reference dump is left in the original workspace.
 

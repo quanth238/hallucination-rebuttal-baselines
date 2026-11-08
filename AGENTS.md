@@ -13,3 +13,5 @@ The user explicitly requested a public repository and a short README. Preserve t
 Show separate Greedy and Sampling T1 tables. Use NLTK3.10.3 rescored greedy values from results/greedy_verified/ and preserve original artifacts in results/greedy/. Keep archived references separate from the new measured Regular controls.
 
 Latest user direction: keep BOTH greedy and sampling T=1 comparisons for Regular, FLB, VISTA and CausalLens. Greedy generation/scoring is complete; resume the preserved sampled FLB checkpoint, then VISTA/CausalLens, followed by a new Regular T1 control. No POTION run. Keep separate completed-results tables and retain the actual preprocessing/timing metadata. The parent execution controller is run_dual_decoding.py.
+
+Latest explicit instruction: do not prioritize Regular. Follow the normal sequence: completed FLB, resume VISTA, then CausalLens, then Regular T1. Reuse all checkpoints and completed greedy results. Do not reorder without an explicit request. The Regular reference check is produced after its500 images are scored.

@@ -1,4 +1,4 @@
-"""Resume existing T1 baselines, add Regular T1, then compare with saved greedy runs."""
+"""Resume saved T1 baselines, run Regular T1, then compare with greedy runs."""
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -41,6 +41,22 @@ def main():
             state.update(status='failed', returncode=child.returncode)
             state_path.write_text(json.dumps(state, indent=2) + '\n')
             raise SystemExit(f'{name} failed; inspect {log_path}')
+        if name == 'score-regular':
+            score = json.loads((regular / 'scores.json').read_text())
+            assert score['count'] == 500
+            references = {
+                'manuscript_table1_rounded': {'CHAIR_S': 52.6, 'CHAIR_I': 11.0, 'object_recall': 66.8},
+                'archived_bacnbt2': {'CHAIR_S': 53.8, 'CHAIR_I': 10.889856876166771,
+                                    'object_recall': 68.03069053708441},
+            }
+            check = {'status': 'completed_500_image_reference_comparison',
+                'actual_metrics': score['metrics'], 'reference_metrics': references,
+                'differences_pp': {label: {key: score['metrics'][key] - value
+                                         for key, value in metrics.items()}
+                                   for label, metrics in references.items()},
+                'run': json.loads((regular / 'run.json').read_text()),
+                'note': 'References are separate historical rows; report measured differences without tuning to reproduce them.'}
+            (ROOT / 'reports/regular_t1_reference_check.json').write_text(json.dumps(check, indent=2) + '\n')
     state_path.write_text(json.dumps({'status': 'completed', 'scope': 'greedy_and_sampled_regular_plus_three_baselines',
         'report': str(ROOT / 'reports/dual_decoding_coco500/comparison.json'),
         'completed_at_utc': datetime.now(timezone.utc).isoformat()}, indent=2) + '\n')

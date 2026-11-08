@@ -15,9 +15,9 @@ All four methods have 500 complete captions. Their original captions, run metada
 
 ## Sampling runs
 
-FLB resumes from its 269-image checkpoint, followed by VISTA and CausalLens with frozen method parameters. A Regular T=1 control follows on the same RTX4090 and under the identical sampled settings. Per-image Torch seed is 30260817+image_id.
+The normal sequence is FLB, VISTA, CausalLens, then Regular T=1. FLB is complete; VISTA resumes from its saved checkpoint. All four sampled methods use the same RTX4090 and sampled settings, with per-image Torch seed30260817+image_id.
 
-The existing three-method runner and policy are unchanged. The separate Regular runner and scope extension preserve earlier source/run hashes. `run_dual_decoding.py` executes the stages sequentially and creates `reports/dual_decoding_coco500/` when all sampled rows finish. It includes per-method differences from the saved greedy scores.
+Existing checkpoints and source/run hashes are preserved. `run_dual_decoding.py` runs the stages sequentially and builds the final two-protocol report. The Regular reference check is produced after Regular finishes; it does not change the queue or force a target numeric score.
 
 ## Reading the comparison
 
@@ -26,3 +26,5 @@ These are two recorded evaluation protocols. The greedy runs use the slow image 
 The supplied 500-image cohort was selected post hoc using POT outcomes; the manifest retains that provenance. Keep every caption, including quality flags. Detailed settings and hashes are retained in each run.json and in the verification reports.
 
 Archived repository references remain under `results/reference/`. Historical H100 throughput is not combined with the new RTX4090 timing. The new sampled Regular row is the control for the new sampled method rows; it explicitly uses repetition penalty 1. No POTION generation is included.
+
+After Regular scoring finishes, `results/sampled/regular/reference_check.json` records measured differences from both the manuscript and archived branch reference rows. It does not adjust parameters to force a numeric match.

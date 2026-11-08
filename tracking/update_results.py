@@ -155,6 +155,9 @@ def main():
         destination.mkdir(exist_ok=True)
         for name in ('comparison.json', 'comparison.csv', 'README.md'):
             shutil.copy2(dual / name, destination / name)
+    regular_check = source / 'reports/regular_t1_reference_check.json'
+    if regular_check.exists():
+        shutil.copy2(regular_check, REPO / 'results/sampled/regular/reference_check.json')
     for variant, folder in [('greedy', 'coco500_matched_v2'), ('sampled', 'coco500_sampled_bacnbt2_v1')]:
         for name in ('comparison.csv', 'comparison.json', 'paper_comparability.json'):
             path = source / 'reports' / folder / name
